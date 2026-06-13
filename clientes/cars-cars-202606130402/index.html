@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Cars - Tu Próximo Vehículo Te Espera</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'); /* Font Awesome para íconos */
+
+        :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2a2a2a;
+            --text-color: #f0f0f0;
+            --accent-color: #007bff; /* Un azul vibrante */
+            --light-grey: #cccccc;
+            --dark-grey-text: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--primary-bg);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-bg);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--secondary-bg);
+            text-align: center;
+        }
+
+        header .logo {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+            display: block;
+        }
+
+        header .logo span {
+            color: var(--text-color);
+            font-weight: 300;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x800/2a2a2a/f0f0f0?text=Fondo+de+Vehículo+Elegante') no-repeat center center/cover;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 1;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        h2 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        h2 span {
+            color: var(--accent-color);
+        }
+
+        h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .benefits-grid, .services-grid, .why-web-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .benefit-item, .service-item, .why-web-item {
+            background-color: var(--primary-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--secondary-bg);
+        }
+
+        .benefit-item:hover, .service-item:hover, .why-web-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .benefit-item i, .service-item i, .why-web-item i {
+            font-size: 3em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .service-item p, .benefit-item p, .why-web-item p {
+            color: var(--light-grey);
+        }
+
+        .cta-whatsapp {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://via.placeholder.com/1920x400/2a2a2a/f0f0f0?text=Fondo+WhatsApp') no-repeat center center/cover;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-whatsapp h2 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .cta-whatsapp .btn {
+            background-color: #25D366;
+        }
+
+        .cta-whatsapp .btn:hover {
+            background-color: #1DA851;
+        }
+
+        footer {
+            background-color: var(--primary-bg);
+            color: var(--dark-grey-text);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--secondary-bg);
+        }
+
+        footer .logo {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        footer .logo span {
+            color: var(--text-color);
+            font-weight: 300;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer .social-icons a {
+            color: var(--dark-grey-text);
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            h3 {
+                font-size: 1.5em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .benefits-grid, .services-grid, .why-web-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta-whatsapp .btn {
+                margin: 10px 0 !important;
+                display: block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            header .logo {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Cars<span>Cars</span></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Tu Próximo Vehículo te Espera en <span>Cars Cars</span></h1>
+                <p>Descubrí nuestra exclusiva selección de automóviles y motocicletas 0km y usados. Calidad y confianza en cada viaje.</p>
+                <a href="#productos" class="btn">Ver Nuestro Stock</a>
+            </div>
+        </section>
+
+        <section id="beneficios">
+            <div class="container">
+                <h2>¿Por qué elegir <span>Cars Cars</span>?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Confianza y Transparencia</h3>
+                        <p>Años de experiencia en el mercado automotor, brindando operaciones claras y seguras.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-car"></i>
+                        <h3>Variedad y Calidad</h3>
+                        <p>Amplio catálogo de vehículos 0km y usados seleccionados, garantizando el mejor estado.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-truck-moving"></i>
+                        <h3>Envíos a Todo el País</h3>
+                        <p>Llevamos tu nuevo auto o moto a cualquier punto de Argentina, con la mayor seguridad.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-headset"></i>
+                        <h3>Asesoramiento Personalizado</h3>
+                        <p>Nuestro equipo de expertos te guiará en cada paso para encontrar tu vehículo ideal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="productos">
+            <div class="container">
+                <h2>Nuestra <span>Oferta</span></h2>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <i class="fas fa-car-side"></i>
+                        <h3>Automóviles 0KM</h3>
+                        <p>Descubrí los últimos modelos de las marcas líderes, listos para estrenar.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-car-alt"></i>
+                        <h3>Usados Seleccionados</h3>
+                        <p>Vehículos de segunda mano en excelente estado, con garantía y la confianza de Cars Cars.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-motorcycle"></i>
+                        <h3>Motocicletas</h3>
+                        <p>Una amplia gama de motos para cada estilo y necesidad, desde urbanas hasta de alta cilindrada.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="propuesta-web" style="background-color: var(--primary-bg);">
+            <div class="container">
+                <h2>Potenciá tu Negocio: ¿Por qué <span>Cars Cars</span> necesita una Web Profesional?</h2>
+                <p style="max-width: 800px; margin: 0 auto 50px auto; color: var(--light-grey);">Tu presencia en Instagram es excelente, pero una web propia te abre un mundo de posibilidades para crecer y vender más. ¡Imaginá tu negocio con esta potencia!</p>
+                <div class="why-web-grid">
+                    <div class="why-web-item">
+                        <i class="fas fa-globe"></i>
+                        <h3>Visibilidad 24/7</h3>
+                        <p>Tu stock accesible a nivel nacional, a toda hora, sin depender de algoritmos.</p>
+                    </div>
+                    <div class="why-web-item">
+                        <i class="fas fa-id-card-alt"></i>
+                        <h3>Más Credibilidad</h3>
+                        <p>Proyectá una imagen aún más profesional y sólida en el mercado.</p>
+                    </div>
+                    <div class="why-web-item">
+                        <i class="fas fa-list-alt"></i>
+                        <h3>Catálogo Detallado</h3>
+                        <p>Mostrá cada vehículo con múltiples fotos, fichas técnicas completas y precios actualizados.</p>
+                    </div>
+                    <div class="why-web-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Generación de Leads</h3>
+                        <p>Capturá contactos calificados con formularios y llamadas a la acción directas.</p>
+                    </div>
+                </div>
+                <a href="#contacto-whatsapp" class="btn" style="margin-top: 50px;">¡Hablemos de tu Proyecto Web!</a>
+            </div>
+        </section>
+
+        <section id="contacto-whatsapp" class="cta-whatsapp">
+            <div class="container">
+                <h2>¿Listo para encontrar tu vehículo ideal?</h2>
+                <p style="font-size: 1.2em; margin-bottom: 40px; color: var(--text-color);">¡Nuestros asesores te esperan para brindarte la mejor atención!</p>
+                <a href="https://wa.me/543814192177" target="_blank" class="btn"><i class="fab fa-whatsapp"></i> Enviar WhatsApp a Blas</a>
+                <a href="https://wa.me/5493813590196" target="_blank" class="btn" style="margin-left: 20px;"><i class="fab fa-whatsapp"></i> Enviar WhatsApp a Agustín</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="logo">Cars<span>Cars</span></a>
+            <p>Av. Aconquija 1567 – Yerba Buena, Tucumán, Argentina</p>
+            <p>Tel: 381 419 2177 / 381 508 1846</p>
+            <div class="social-icons" style="margin-top: 20px;">
+                <a href="https://www.instagram.com/carscars_ok" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p style="margin-top: 20px;">&copy; 2024 Cars Cars. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
