@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Cars - Tu Concesionaria de Confianza</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        :root {
+            --primary-bg: linear-gradient(145deg, #0f0f0f, #050505);
+            --secondary-bg: #1a1a1a;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-color: #e0e0e0;
+            --heading-color: #ffffff;
+            --accent-color: #00ffff; /* Cyan/Electric Blue */
+            --accent-color-hover: #00e6e6;
+            --shadow-light: rgba(0, 0, 0, 0.3);
+            --shadow-dark: rgba(0, 0, 0, 0.6);
+            --glass-blur: 10px;
+            --border-radius: 12px;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--accent-color-hover);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--heading-color);
+            margin-bottom: 0.8em;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 30px var(--shadow-light);
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-speed);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-fallback {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #050505;
+            font-weight: bold;
+            font-size: 1.2em;
+            border: 1px solid var(--border-color);
+        }
+
+        .logo-text {
+            color: var(--heading-color);
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color var(--transition-speed), transform var(--transition-speed);
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width var(--transition-speed) ease-out;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--secondary-bg);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-color-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-dark);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: var(--secondary-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px; /* Offset for fixed header */
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://instagram.fsac1-1.fna.fbcdn.net/v/t51.71878-15/719900327_1514099203597811_554384200469_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=instagram.fsac1-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2gHsBXfHI7QW5jWDSPae5uHEfOyce7GiK7IAtW0UCD-T5RgsBul42n_Z5N_0cgmWMqQ&_nc_ohc=MEBJRjCc9ZAQ7kNvwFEkJ8z&_nc_gid=rAnXhZQL_0WoG-iAzlIsMw&edm=APs17CUBAAAA&ccb=7-5&oh=00_Af96VhGIfa42GUXOd-7fi3uyMDdzVRg9uIkWJMLbKLhVLA&oe=6A32AF11&_nc_sid=10d13b');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.7) grayscale(0.2);
+            z-index: -2;
+            animation: zoomIn 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8));
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeIn 1.2s ease-out forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+
+        .hero h1 {
+            font-size: 3.8em;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 10px var(--shadow-dark);
+            background: linear-gradient(45deg, var(--accent-color), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-buttons .btn {
+            margin: 0 15px;
+            min-width: 180px;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+
+        .hero-buttons .btn:nth-child(2) {
+            animation-delay: 1.2s;
+        }
+
+
+        /* Sections General */
+        section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        section h2 {
+            font-size: 2.8em;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 15px;
+            color: var(--accent-color);
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            animation: slideInLeft 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            padding: 20px;
+            animation: slideInRight 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-speed) ease-in-out;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--accent-color) 0%, rgba(0,255,255,0) 70%);
+            border-radius: var(--border-radius);
+            z-index: -1;
+            transform: rotate(-3deg);
+            opacity: 0.3;
+            transition: opacity var(--transition-speed);
+        }
+        .about-image:hover::before {
+            opacity: 0.5;
+        }
+
+        /* Featured Vehicles */
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .vehicle-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 8px 25px var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow-dark);
+        }
+
+        .vehicle-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .vehicle-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .vehicle-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .vehicle-info h3 {
+            font-size: 1.5em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--heading-color);
+        }
+
+        .vehicle-info p {
+            font-size: 0.95em;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .vehicle-info .btn {
+            width: 100%;
+            margin-top: auto;
+        }
+        
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+
+        .benefit-icon {
+            font-size: 3em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 15px var(--accent-color);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .benefit-item h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: var(--heading-color);
+        }
+
+        .benefit-item p {
+            font-size: 0.95em;
+            color: #b0b0b0;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px var(--shadow-dark);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            color: white;
+            padding: 15px;
+            font-size: 0.9em;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .contact-content p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 250px;
+            flex: 1;
+            max-width: 350px;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+
+        .contact-item .icon {
+            font-size: 2.5em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .contact-item h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: var(--heading-color);
+        }
+
+        .contact-item p {
+            margin-bottom: 0;
+            font-size: 1em;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            color: #a0a0a0;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9em;
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer .social-links {
+            margin-top: 20px;
+        }
+
+        footer .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 1.5em;
+            color: #a0a0a0;
+            transition: color var(--transition-speed), transform var(--transition-speed);
+        }
+
+        footer .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Image Fallback/Error */
+        .img-error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            color: #eee;
+            font-size: 0.9em;
+            text-align: center;
+            min-height: 150px;
+            border-radius: var(--border-radius);
+            border: 1px dashed var(--border-color);
+            padding: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3em;
+            }
+            .hero p {
+                font-size: 1.1em;
+            }
+            section h2 {
+                font-size: 2.2em;
+            }
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-image {
+                margin-top: 30px;
+                padding: 0; /* Remove padding from image container for smaller screens */
+            }
+            .about-image img {
+                height: 300px;
+            }
+            .about-image::before {
+                display: none; /* Hide decorative background on smaller screens */
+            }
+            .vehicle-grid, .benefits-grid, .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            .contact-item {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav a {
+                font-size: 0.9em;
+            }
+            .hero {
+                height: 80vh;
+            }
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero-buttons .btn {
+                margin: 0;
+            }
+            section {
+                padding: 60px 0;
+            }
+            section h2 {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+            .vehicle-grid, .benefits-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 2em;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 0.9em;
+            }
+            .logo-text {
+                font-size: 1.2em;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* JavaScript Animations on scroll */
+        .hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px);
+        }
+        .animate-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-slide-left {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateX(-50px);
+        }
+        .animate-slide-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-slide-right {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateX(50px);
+        }
+        .animate-slide-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+        .animate-fade-in.active {
+            opacity: 1;
+        }
+
+        /* Specific delays for grid items */
+        .vehicle-grid .vehicle-card:nth-child(1) { animation-delay: 0.1s; }
+        .vehicle-grid .vehicle-card:nth-child(2) { animation-delay: 0.2s; }
+        .vehicle-grid .vehicle-card:nth-child(3) { animation-delay: 0.3s; }
+        .vehicle-grid .vehicle-card:nth-child(4) { animation-delay: 0.4s; }
+        .vehicle-grid .vehicle-card:nth-child(5) { animation-delay: 0.5s; }
+        .vehicle-grid .vehicle-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .benefits-grid .benefit-item:nth-child(1) { animation-delay: 0.1s; }
+        .benefits-grid .benefit-item:nth-child(2) { animation-delay: 0.2s; }
+        .benefits-grid .benefit-item:nth-child(3) { animation-delay: 0.3s; }
+        .benefits-grid .benefit-item:nth-child(4) { animation-delay: 0.4s; }
+        .benefits-grid .benefit-item:nth-child(5) { animation-delay: 0.5s; }
+        .benefits-grid .benefit-item:nth-child(6) { animation-delay: 0.6s; }
+
+        .gallery-grid .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-grid .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-grid .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-grid .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-grid .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-grid .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+        .gallery-grid .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+        .gallery-grid .gallery-item:nth-child(8) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img src="https://scontent-lax3-2.cdninstagram.com/v/t51.82787-19/519605705_18282956869252074_4183538261967100659_n.jpg?stp=dst-jpg_e0_s150x150_tt6&amp;efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMxIn0&amp;_nc_ht=scontent-lax3-2.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gFabS8OfjkRat0IQuWurgqnBFhCwm2wA-yyU_uOqhMqNIc7kN-NKoLH-c7_1q1zfA4&amp;_nc_ohc=Y3RXgLs8zJMQ7kNvwFfo9zh&amp;_nc_gid=_UDEHD4E9hRngqxDaKF_Kg&amp;edm=AOQ1c0wBAAAA&amp;ccb=7-5&amp;oh=00_Af9rCwwMvoaktgpDNWQibByeXT8T9O13mKi4sndjYJJww&amp;oe=6A32BC07&amp;_nc_sid=8b3546" 
+                     alt="Logo de Cars Cars" class="logo" loading="lazy" 
+                     onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = '&lt;div class=\'logo-fallback\'&gt;CC&lt;/div&gt;';">
+                <span class="logo-text">Cars Cars</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#about">Nosotros</a></li>
+                    <li><a href="#vehicles">Vehículos</a></li>
+                    <li><a href="#benefits">Beneficios</a></li>
+                    <li><a href="#gallery">Galería</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h1>Tu Próximo Vehículo de Ensueño te Espera</h1>
+                <p>Descubre la selección más exclusiva y confiable de autos, camionetas y motos. En Cars Cars, tu pasión por la velocidad y el estilo se hace realidad.</p>
+                <div class="hero-buttons">
+                    <a href="#vehicles" class="btn btn-primary">Ver Nuestro Catálogo</a>
+                    <a href="#contact" class="btn btn-secondary">Contactar Asesor</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="animate-on-scroll">Sobre Cars Cars</h2>
+                <div class="about-content">
+                    <div class="about-text animate-slide-left">
+                        <h3>Excelencia y Confianza en Cada Kilómetro</h3>
+                        <p>En Cars Cars, entendemos que comprar un vehículo es una decisión importante. Por eso, nos dedicamos a ofrecer una experiencia transparente, profesional y personalizada. Con años de experiencia en el mercado, hemos construido una reputación basada en la calidad de nuestros vehículos y la satisfacción de nuestros clientes.</p>
+                        <p>Nuestro equipo de expertos te guiará en cada paso, desde la elección del modelo perfecto hasta las opciones de financiación, asegurando que encuentres exactamente lo que buscas con total tranquilidad.</p>
+                        <p>Av. Aconquija 1567 – Yerba Buena, Tucumán</p>
+                        <p>Contacto: 381 419 2177 / 381 508 1846</p>
+                    </div>
+                    <div class="about-image animate-slide-right">
+                        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/716630569_2268998357202170_825965043682335033_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;_nc_cat=102&amp;_nc_oc=Q6cZ2gEV7oWN1eBTfEc-7CAKpfsB-qKMOKZNTbkYuP1S1R1RR0SelyiGJeOggxD6wGaEA0k&amp;_nc_ohc=HK-M-mdxNEoQ7kNvwF0I0iI&amp;_nc_gid=KIXTo7VwxlFCuhoAnFTfaQ&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af8ZIOjf6EqiB4N3JEQUQoRe_-PF3mrlxkt1iqOibktxmA&amp;oe=6A32B5B6&amp;_nc_sid=10d13b" 
+                             alt="Interior de un auto de lujo" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vehicles">
+            <div class="container">
+                <h2 class="animate-on-scroll">Nuestros Vehículos Destacados</h2>
+                <div class="vehicle-grid">
+                    <div class="vehicle-card animate-on-scroll">
+                        <img src="https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/717104049_27151124411220044_3120599302411160929_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-ord5-1.cdninstagram.com&amp;_nc_cat=108&amp;_nc_oc=Q6cZ2gEjgycMa6tcHFDf0Ic4_hD0vQe4FYwEMWXu3MYA5K_EWPLGsq-lQwmkxv-twQak0SM&amp;_nc_ohc=I1p_EK_M9YYQ7kNvwFxZJsR&amp;_nc_gid=w836RoGM7Z_XuBSU5cR7ZA&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af9hCoAOERVsE5sJFKDMg2Ei1DfnKdmIMsnWhGi4r7CxJA&amp;oe=6A32D1F2&amp;_nc_sid=10d13b" 
+                             alt="Ford Ranger Raptor" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                        <div class="vehicle-info">
+                            <h3>Ford Ranger Raptor</h3>
+                            <p>¡Potencia y aventura sin límites! Disponible en Cars Cars. 0 km · Sin patentar.</p>
+                            <a href="https://wa.me/5493814192177?text=Hola! Estoy interesado en la Ford Ranger Raptor." target="_blank" class="btn btn-primary">Consultar</a>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card animate-on-scroll">
+                        <img src="https://scontent-lga3-1.cdninstagram.com/v/t51.71878-15/714882023_1541420780510171_2837462809275303736_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=111&amp;_nc_oc=Q6cZ2gElQsuQEWKFtBlxYTQZ4SyWOCQLsBhGWjlWTcJtUpDkGbhDvYeX9KDXJGy4RNXYQSc&amp;_nc_ohc=cRJ9Clxx6IUQ7kNvwGzxmJS&amp;_nc_gid=Y51XcACHx82D9KMxGcdaGw&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af-jp6fKJ1qt1DOXZnXW8VkuM401117ZjMVLS2t_HgEojA&amp;oe=6A32D255&amp;_nc_sid=10d13b" 
+                             alt="Mitsubishi Montero 1999" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                        <div class="vehicle-info">
+                            <h3>Mitsubishi Montero 1999</h3>
+                            <p>Un clásico que no pierde su encanto. Ideal para los amantes de la aventura.</p>
+                            <a href="https://wa.me/5493814192177?text=Hola! Estoy interesado en la Mitsubishi Montero 1999." target="_blank" class="btn btn-primary">Consultar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="vehicle-card animate-on-scroll">
+                        <img src="https://scontent-atl3-1.cdninstagram.com/v/t39.30808-6/710598461_1502388641684646_8015241078914829250_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gEiCx-Th9SX3kG_huVDsmCmi9aqXT4OCW8sQmfhnj2iTNHuO75neMepbva9tR9-mU&amp;_nc_ohc=En9Pdh1sAjYQ7kNvwE_Nc_I&amp;_nc_gid=X6gopMPbTDMHDRMO7TpJoQ&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af98WC-sT1ieBPNxMVjusAWzYYq07dqFQJZ6IqKBTiJMAg&amp;oe=6A32B8D8&amp;_nc_sid=10d13b" 
+                             alt="Volkswagen Taos Highline 2022" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                        <div class="vehicle-info">
+                            <h3>Volkswagen Taos Highline 250 TSI AT</h3>
+                            <p>Modelo 2022 · 49.600 km. Confort y tecnología para tu día a día.</p>
+                            <a href="https://wa.me/5493814192177?text=Hola! Estoy interesado en el Volkswagen Taos Highline 2022." target="_blank" class="btn btn-primary">Consultar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="vehicle-card animate-on-scroll">
+                        <img src="https://scontent-atl3-1.cdninstagram.com/v/t39.30808-6/708993999_1502388738351303_2612699106618268105_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_cat=103&amp;_nc_oc=Q6cZ2gEiCx-Th9SX3kG_huVDsmCmi9aqXT4OCW8sQmfhnj2iTNHuO75neMepbva9tR9-mU&amp;_nc_ohc=7-pi_T-NoZkQ7kNvwGE3d5_&amp;_nc_gid=X6gopMPbTDMHDRMO7TpJoQ&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af-X8VGXXAZXaffvjsa-elKUK0jXbloRxDTJRWfrGZlpQw&amp;oe=6A32C510&amp;_nc_sid=10d13b" 
+                             alt="Volkswagen Nivus Comfortline 2026" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                        <div class="vehicle-info">
+                            <h3>Volkswagen Nivus Comfortline AT</h3>
+                            <p>Modelo 2026 · 10.000 km. Diseño moderno y rendimiento eficiente.</p>
+                            <a href="https://wa.me/5493814192177?text=Hola! Estoy interesado en el Volkswagen Nivus Comfortline 2026." target="_blank" class="btn btn-primary">Consultar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits">
+            <div class="container">
+                <h2 class="animate-on-scroll">Beneficios de Tener Tu Propia Web</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item animate-on-scroll">
+                        <div class="benefit-icon">🌐</div>
+                        <h3>Catálogo Organizado 24/7</h3>
+                        <p>Tus vehículos disponibles para ver en cualquier momento, con descripciones detalladas y fotos de alta calidad.</p>
+                    </div>
+                    <div class="benefit-item animate-on-scroll">
+                        <div class="benefit-icon">⭐</div>
+                        <h3>Imagen Profesional</h3>
+                        <p>Refuerza la credibilidad y seriedad de Cars Cars con una presencia online elegante y a la altura de tu marca.</p>
+                    </div>
+                    <div class="benefit-item animate-on-scroll">
+                        <div class="benefit-icon">📈</div>
+                        <h3>Mayor Alcance y Ventas</h3>
+                        <p>Atrae a más clientes potenciales más allá de Instagram, aumentando tus consultas y oportunidades de negocio.</p>
+                    </div>
+                    <div class="benefit-item animate-on-scroll">
+                        <div class="benefit-icon">💬</div>
+                        <h3>Contacto Directo y Eficaz</h3>
+                        <p>Facilita la comunicación con tus clientes a través de formularios, WhatsApp y datos claros de contacto.</p>
+                    </div>
+                    <div class="benefit-item animate-on-scroll">
+                        <div class="benefit-icon">✅</div>
+                        <h3>Genera Confianza</h3>
+                        <p>Una web propia demuestra compromiso y profesionalismo, consolidando la confianza de tus futuros compradores.</p>
+                    </div>
+                    <div class="benefit-item animate-on-scroll">
+                        <div class="benefit-icon">📊</div>
+                        <h3>Control Total</h3>
+                        <p>Gestiona tu inventario, promociones y contenido sin depender de plataformas de terceros.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="container">
+                <h2 class="animate-on-scroll">Nuestra Galería de Vehículos</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item animate-on-scroll">
+                        <img src="https://scontent-atl3-3.cdninstagram.com/v/t39.30808-6/709864519_1502388681684642_6939168723459476391_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-3.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gEiCx-Th9SX3kG_huVDsmCmi9aqXT4OCW8sQmfhnj2iTNHuO75neMepbva9tR9-mU&amp;_nc_ohc=RBrupW4c8G4Q7kNvwGQQmnB&amp;_nc_gid=X6gopMPbTDMHDRMO7TpJoQ&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af-BIu6OfCIaBOpJu6N4T_zDG6dwEDbfWQ0e2mlUEdcvug&amp;oe=6A32BEE3&amp;_nc_sid=10d13b" 
+                             alt="Vehículo de lujo blanco" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                        <div class="gallery-caption">Elegancia en cada detalle.</div>
+                    </div>
+                    <div class="gallery-item animate-on-scroll">
+                        <img src="https://scontent-atl3-3.cdninstagram.com/v/t39.30808-6/710193146_1502388718351305_8102181668357247126_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-3.cdninstagram.com&amp;_nc_cat=109&amp;_nc_oc=Q6cZ2gEiCx-Th9SX3kG_huVDsmCmi9aqXT4OCW8sQmfhnj2iTNHuO75neMepbva9tR9-mU&amp;_nc_ohc=irNo6b25vQUQ7kNvwFHXXxe&amp;_nc_gid=X6gopMPbTDMHDRMO7TpJoQ&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af81m4CRs_zOIONIPa1572iWtCwM3TjTLfFuOnBCQsTCVyg&amp;oe=6A32D587&amp;_nc_sid=10d13b" 
+                             alt="Deportivo oscuro" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                        <div class="gallery-caption">Rendimiento y estilo.</div>
+                    </div>
+                    <div class="gallery-item animate-on-scroll">
+                        <img src="https://scontent-atl3-3.cdninstagram.com/v/t39.30808-6/708814089_1502388625017981_2995576027928801159_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-3.cdninstagram.com&amp;_nc_cat=109&amp;_nc_oc=Q6cZ2gEiCx-Th9SX3kG_huVDsmCmi9aqXT4OCW8sQmfhnj2iTNHuO75neMepbva9tR9-mU&amp;_nc_ohc=wcq9bZZmGpYQ7kNvwFOi4Dt&amp;_nc_gid=X6gopMPbTDMHDRMO7TpJoQ&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af_unhpDAESCC7Pk1yawBFjiwp6pAA2SECSMgKD-F0ZOhw&amp;oe=6A32C73E&amp;_nc_sid=10d13b" 
+                             alt="Auto clásico restaurado" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                        <div class="gallery-caption">Un clásico atemporal.</div>
+                    </div>
+                    <div class="gallery-item animate-on-scroll">
+                        <img src="https://scontent-atl3-3.cdninstagram.com/v/t39.30808-6/710126235_1502388678351309_8491677220176034555_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-3.cdninstagram.com&amp;_nc_cat=109&amp;_nc_oc=Q6cZ2gEiCx-Th9SX3kG_huVDsmCmi9aqXT4OCW8sQmfhnj2iTNHuO75neMepbva9tR9-mU&amp;_nc_ohc=cXrGqzx_MZsQ7kNvwHIkzlp&amp;_nc_gid=X6gopMPbTDMHDRMO7TpJoQ&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af-63J2sYKf_G1qIxKbVR-khx3ep89W-486ZrTUsrp-IeQ&amp;oe=6A32CEBE&amp;_nc_sid=10d13b" 
+                             alt="Interior de vehículo moderno" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                        <div class="gallery-caption">Tecnología y confort.</div>
+                    </div>
+                    <div class="gallery-item animate-on-scroll">
+                        <img src="https://scontent-atl3-1.cdninstagram.com/v/t39.30808-6/709307228_1502388591684651_8676857660957202842_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_cat=103&amp;_nc_oc=Q6cZ2gEiCx-Th9SX3kG_huVDsmCmi9aqXT4OCW8sQmfhnj2iTNHuO75neMepbva9tR9-mU&amp;_nc_ohc=xEcSsG5EkIgQ7kNvwGfOpqB&amp;_nc_gid=X6gopMPbTDMHDRMO7TpJoQ&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af8Y97amwPCmTdX3fz4wZyq-FfEeSaCBnD4SFkWAaeSlug&amp;oe=6A32A79F&amp;_nc_sid=10d13b" 
+                             alt="Detalle de camioneta potente" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                        <div class="gallery-caption">Detalles que marcan la diferencia.</div>
+                    </div>
+                    <div class="gallery-item animate-on-scroll">
+                        <img src="https://scontent-lax3-2.cdninstagram.com/v/t39.30808-6/720126404_1514877753769068_5674414045476080508_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-lax3-2.cdninstagram.com&amp;_nc_cat=100&amp;_nc_oc=Q6cZ2gGNK2bhPlsaBB75NB4wW2zotsSh37nNeVBfXJ_pPraCcmBmVh8D8qmffFTkbF-xaKA&amp;_nc_ohc=F5IvZx8PX5AQ7kNvwEOnXiK&amp;_nc_gid=A4pXgTFyleEzY2QEuzTJsQ&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af9mLQeQ8bxA2vi83mVKiOHk54vlZIdHlYk_IaceNKKbgA&amp;oe=6A32D5BE&amp;_nc_sid=10d13b" 
+                             alt="Vehículo en exhibición" loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML = 'Imagen no disponible';">
+                        <div class="gallery-caption">Siempre las mejores opciones.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="animate-on-scroll">Contáctanos</h2>
+                <div class="contact-content">
+                    <p>¿Listo para llevar tu negocio al siguiente nivel? Un sitio web profesional es la clave para expandir tu alcance, organizar tu inventario y generar más ventas. ¡Hablemos!</p>
+                    <div class="contact-info">
+                        <div class="contact-item animate-on-scroll">
+                            <span class="icon">📞</span>
+                            <h3>Teléfono</h3>
+                            <p>381 419 2177</p>
+                            <p>381 508 1846</p>
+                        </div>
+                        <div class="contact-item animate-on-scroll">
+                            <span class="icon">📍</span>
+                            <h3>Dirección</h3>
+                            <p>Av. Aconquija 1567</p>
+                            <p>Yerba Buena, Tucumán</p>
+                        </div>
+                        <div class="contact-item animate-on-scroll">
+                            <span class="icon">💬</span>
+                            <h3>WhatsApp</h3>
+                            <p>¡Envíanos un mensaje!</p>
+                            <a href="https://wa.me/5493814192177?text=Hola! Me gustaría saber más sobre los vehículos de Cars Cars." target="_blank" class="btn btn-primary">Chatear Ahora</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container animate-fade-in">
+            <p>&copy; 2024 Cars Cars. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/carscars_ok" target="_blank" aria-label="Instagram de Cars Cars">📸</a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5493814192177?text=Hola! Me gustaría saber más sobre los vehículos de Cars Cars." class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+        💬
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Intersection Observer for scroll animations
+            const animateElements = document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Stop observing once animated
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2, // Trigger when 20% of the element is visible
+                rootMargin: '0px 0px -50px 0px' // Offset the bottom to trigger earlier
+            });
+
+            animateElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Specific delay for hero content to avoid conflict with initial fadeIn
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                setTimeout(() => {
+                    heroContent.style.opacity = 1;
+                    heroContent.style.transform = 'translateY(0)';
+                }, 500); // Matches CSS animation-delay
+            }
+            const heroButtons = document.querySelectorAll('.hero-buttons .btn');
+            if (heroButtons) {
+                heroButtons.forEach((btn, index) => {
+                    setTimeout(() => {
+                        btn.style.opacity = 1;
+                        btn.style.transform = 'translateY(0)';
+                    }, 1000 + (index * 200)); // Matches CSS animation-delay
+                });
+            }
+
+            // Image onerror for the logo: Already handled in HTML with inline JS.
+            // Image onerror for other images: Handled in HTML with inline JS.
+        });
+    </script>
+
+</body>
+</html>
