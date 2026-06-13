@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cars Cars | Landing demo premium</title>
+  <meta name="description" content="Demo de landing page profesional para Cars Cars. Vehículos, galería, ubicación y contacto.">
+  <style>
+    :root {
+      --bg: #07090d;
+      --bg-2: #0d1118;
+      --surface: rgba(255,255,255,.075);
+      --surface-2: rgba(255,255,255,.105);
+      --card: #111822;
+      --card-2: #151f2c;
+      --text: #f5f7fb;
+      --muted: #aeb8c7;
+      --line: rgba(255,255,255,.12);
+      --accent: #1098ff;
+      --accent-2: #00d4ff;
+      --gold: #d9b56f;
+      --whatsapp: #25d366;
+      --instagram-1: #f58529;
+      --instagram-2: #dd2a7b;
+      --instagram-3: #8134af;
+      --radius: 24px;
+      --shadow: 0 25px 80px rgba(0,0,0,.45);
+      --shadow-soft: 0 18px 50px rgba(0,0,0,.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(16,152,255,.22), transparent 32%),
+        radial-gradient(circle at 82% 12%, rgba(217,181,111,.12), transparent 35%),
+        linear-gradient(180deg, #05070a 0%, #0d1118 45%, #07090d 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 82px;
+      z-index: 50;
+      background: rgba(7, 9, 13, .72);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .logo-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(16,152,255,.9), rgba(0,212,255,.8)),
+        #111;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 42px rgba(16,152,255,.25);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    .logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .logo-fallback {
+      display: none;
+      font-weight: 1000;
+      letter-spacing: -.05em;
+      font-size: 1rem;
+    }
+
+    .logo-wrap.image-error img {
+      display: none;
+    }
+
+    .logo-wrap.image-error .logo-fallback {
+      display: block;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .brand-name {
+      font-size: 1.22rem;
+      font-weight: 1000;
+      letter-spacing: -.04em;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: .94rem;
+      font-weight: 800;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: .25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: .25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      transition: .25s ease;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,.12);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .instagram {
+      background: linear-gradient(135deg, var(--instagram-1), var(--instagram-2), var(--instagram-3));
+      border: 0;
+    }
+
+    .whatsapp {
+      background: var(--whatsapp);
+      border: 0;
+      color: white;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding-top: 82px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.12) contrast(1.08);
+      transform: scale(1.02);
+      animation: heroZoom 18s ease-in-out infinite alternate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(5,7,10,.96) 0%, rgba(5,7,10,.72) 46%, rgba(5,7,10,.28) 100%),
+        linear-gradient(180deg, rgba(5,7,10,.05) 0%, #07090d 100%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -160px;
+      bottom: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16,152,255,.32), transparent 62%);
+      z-index: -1;
+      filter: blur(4px);
+      animation: floatGlow 7s ease-in-out infinite;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.02); }
+      to { transform: scale(1.10); }
+    }
+
+    @keyframes floatGlow {
+      0%, 100% { transform: translateY(0); opacity: .75; }
+      50% { transform: translateY(-22px); opacity: 1; }
+    }
+
+    .hero-content {
+      max-width: 820px;
+      padding: 100px 0 70px;
+      animation: fadeUp .9s ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(16,152,255,.12);
+      border: 1px solid rgba(16,152,255,.30);
+      color: #d8efff;
+      font-weight: 900;
+      font-size: .9rem;
+      margin-bottom: 24px;
+      box-shadow: 0 16px 40px rgba(16,152,255,.12);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 7.2vw, 6.6rem);
+      line-height: .92;
+      letter-spacing: -.075em;
+      margin-bottom: 22px;
+      max-width: 950px;
+      text-shadow: 0 20px 70px rgba(0,0,0,.5);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.75;
+      max-width: 700px;
+      margin-bottom: 34px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      min-height: 54px;
+      padding: 15px 24px;
+      border-radius: 16px;
+      font-weight: 1000;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: .25s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 20px 45px rgba(16,152,255,.26);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 26px 70px rgba(16,152,255,.38);
+    }
+
+    .btn-ghost {
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      backdrop-filter: blur(14px);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.14);
+    }
+
+    .section {
+      padding: 105px 0;
+      position: relative;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.1rem, 4vw, 3.6rem);
+      letter-spacing: -.055em;
+      line-height: 1;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .glass-card {
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .about-copy {
+      padding: 36px;
+    }
+
+    .about-copy h2 {
+      font-size: clamp(1.9rem, 3.5vw, 3.1rem);
+      letter-spacing: -.045em;
+      margin-bottom: 18px;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .metric {
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(16,152,255,.10);
+      border: 1px solid rgba(16,152,255,.18);
+      transition: .25s ease;
+    }
+
+    .metric:hover {
+      transform: translateY(-4px);
+      background: rgba(16,152,255,.15);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.35rem;
+      margin-bottom: 5px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .about-image {
+      min-height: 470px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .about-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: .45s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.06);
+    }
+
+    .vehicles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .vehicle-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 70px rgba(0,0,0,.28);
+      transition: .28s ease;
+    }
+
+    .vehicle-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 0%, rgba(16,152,255,.18), transparent 35%);
+      opacity: 0;
+      transition: .28s ease;
+      pointer-events: none;
+    }
+
+    .vehicle-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(16,152,255,.38);
+      box-shadow: 0 30px 90px rgba(0,0,0,.38);
+    }
+
+    .vehicle-card:hover::before {
+      opacity: 1;
+    }
+
+    .vehicle-image {
+      height: 250px;
+      overflow: hidden;
+      background: var(--card-2);
+    }
+
+    .vehicle-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: .45s ease;
+    }
+
+    .vehicle-card:hover .vehicle-image img {
+      transform: scale(1.08);
+    }
+
+    .vehicle-content {
+      padding: 25px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(217,181,111,.13);
+      border: 1px solid rgba(217,181,111,.28);
+      color: #ffe5a8;
+      font-size: .78rem;
+      font-weight: 1000;
+      margin-bottom: 15px;
+    }
+
+    .vehicle-content h3 {
+      font-size: 1.25rem;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: -.025em;
+    }
+
+    .vehicle-content p {
+      color: var(--muted);
+      line-height: 1.7;
+      min-height: 72px;
+      margin-bottom: 18px;
+    }
+
+    .mini-link {
+      color: #d9f1ff;
+      font-weight: 1000;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mini-link::after {
+      content: "→";
+      transition: .2s ease;
+    }
+
+    .mini-link:hover::after {
+      transform: translateX(5px);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .benefit {
+      padding: 28px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      transition: .25s ease;
+    }
+
+    .benefit:hover {
+      transform: translateY(-7px);
+      background: rgba(255,255,255,.10);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .benefit-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(16,152,255,.22), rgba(0,212,255,.14));
+      margin-bottom: 18px;
+      font-size: 1.35rem;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .benefit p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      height: 240px;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--card-2);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(6) {
+      grid-column: span 2;
+    }
+
+    .gallery-item img {
+      height: 100%;
+      object-fit: cover;
+      transition: .45s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+      filter: saturate(1.12) contrast(1.08);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .contact-card {
+      padding: 34px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at top right, rgba(16,152,255,.20), transparent 38%),
+        linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.035));
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h2 {
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
+      letter-spacing: -.05em;
+      margin-bottom: 16px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 22px;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .map-box {
+      min-height: 430px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: var(--card);
+    }
+
+    .map-box iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(.15) contrast(1.05);
+    }
+
+    .footer {
+      padding: 36px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .float-whatsapp {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: var(--whatsapp);
+      color: white;
+      display: grid;
+      place-items: center;
+      z-index: 60;
+      box-shadow: 0 22px 55px rgba(37,211,102,.36);
+      transition: .25s ease;
+      animation: pulse 2.1s ease-in-out infinite;
+    }
+
+    .float-whatsapp:hover {
+      transform: translateY(-5px) scale(1.04);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 22px 55px rgba(37,211,102,.30); }
+      50% { box-shadow: 0 22px 70px rgba(37,211,102,.55); }
+    }
+
+    .image-error {
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(135deg, rgba(16,152,255,.16), rgba(217,181,111,.10)),
+        #111822;
+      min-height: 100%;
+    }
+
+    .image-error::after {
+      content: "Imagen no disponible";
+      color: var(--muted);
+      font-weight: 900;
+      font-size: .92rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp .75s ease forwards;
+    }
+
+    .reveal:nth-child(2) { animation-delay: .08s; }
+    .reveal:nth-child(3) { animation-delay: .16s; }
+    .reveal:nth-child(4) { animation-delay: .24s; }
+    .reveal:nth-child(5) { animation-delay: .32s; }
+    .reveal:nth-child(6) { animation-delay: .40s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1020px) {
+      .nav-links {
+        display: none;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .vehicles-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .nav-actions {
+        gap: 8px;
+      }
+
+      .icon-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+      }
+
+      .hero {
+        min-height: 88vh;
+      }
+
+      .hero-content {
+        padding: 80px 0 56px;
+      }
+
+      .vehicles-grid,
+      .benefits-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item,
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(6) {
+        grid-column: auto;
+      }
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head h2 {
+        margin-bottom: 16px;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#hero">
+        <span class="logo-wrap ">
+          <img src="https://scontent-iad6-1.cdninstagram.com/v/t51.82787-19/519605705_18282956869252074_4183538261967100659_n.jpg?stp=dst-jpg_e0_s150x150_tt6&amp;efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&amp;_nc_ht=scontent-iad6-1.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gEF-GJD5yIkLvZAwrcOT7Zu74k8J0tjce1zu2NZ4I9jTM_z22u999UDqAELEkD3nTI&amp;_nc_ohc=Y3RXgLs8zJMQ7kNvwEiOuon&amp;_nc_gid=VsI-ubMmQkyGVRq1hPSYxw&amp;edm=AOQ1c0wBAAAA&amp;ccb=7-5&amp;oh=00_Af_hXXiGgrQ8pQDoZ-3Mq5sOWVtSjfSb3cFXk6LTJpPPhA&amp;oe=6A32BC07&amp;_nc_sid=8b3546" alt="Cars Cars logo" loading="eager" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+          <span class="logo-fallback">CC</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">Cars Cars</span>
+          <span class="brand-sub">Landing demo premium</span>
+        </span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#hero">Inicio</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#vehiculos">Vehículos</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="icon-btn instagram" href="https://www.instagram.com/carscars_ok" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="white" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+          </svg>
+        </a>
+        <a class="icon-btn whatsapp" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg width="22" height="22" viewBox="0 0 32 32" fill="white">
+            <path d="M16.02 3C8.86 3 3.04 8.72 3.04 15.75c0 2.5.74 4.82 2.02 6.79L3 29l6.66-2.02A13.1 13.1 0 0 0 16.02 28C23.18 28 29 22.28 29 15.25S23.18 3 16.02 3Zm0 22.74c-2.05 0-3.95-.6-5.55-1.64l-.4-.26-3.96 1.2 1.25-3.82-.27-.42a10.35 10.35 0 0 1-1.74-5.05c0-5.77 4.78-10.47 10.67-10.47s10.67 4.7 10.67 10.47-4.78 9.99-10.67 9.99Zm5.85-7.48c-.32-.16-1.88-.91-2.17-1.02-.29-.11-.5-.16-.72.16-.21.31-.83 1.02-1.02 1.23-.19.21-.37.24-.69.08-.32-.16-1.35-.49-2.57-1.55-.95-.84-1.59-1.88-1.78-2.19-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.71-.99-2.35-.26-.63-.53-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.08-1.12 2.64s1.15 3.06 1.31 3.27c.16.21 2.26 3.4 5.48 4.76.77.33 1.37.53 1.84.68.77.24 1.47.21 2.02.13.62-.09 1.88-.76 2.15-1.5.27-.74.27-1.37.19-1.5-.08-.13-.29-.21-.61-.37Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-bg image-box">
+        <img src="https://scontent-atl3-3.cdninstagram.com/v/t51.71878-15/717104049_27151124411220044_3120599302411160929_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-atl3-3.cdninstagram.com&amp;_nc_cat=108&amp;_nc_oc=Q6cZ2gFkHSJYny5UcHr9qedwPAXzY8CWRIipzuNLv-P-Y4tkRFDmn4Zo1NxLhN9LM7Vd0m4&amp;_nc_ohc=I1p_EK_M9YYQ7kNvwEzLKTZ&amp;_nc_gid=1Q3z5mE9e2qL91XCGB9LPQ&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af-plThXp4_6khfNxE5oYjANDmSv-zEOLE1S4xzfcXPPaQ&amp;oe=6A32D1F2&amp;_nc_sid=10d13b" alt="Cars Cars vehículo destacado" loading="eager" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+
+      <div class="container hero-content">
+        <div class="eyebrow">🚘 Vehículos seleccionados · Cars&amp;Cars</div>
+        <h1>Tu Próximo Vehículo te Espera en Cars &amp; Cars</h1>
+        <p>La mayor selección de autos y motos, nuevos y usados, con el respaldo y la confianza que buscás.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#vehiculos">Contactar Ahora</a>
+          <a class="btn btn-ghost" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/carscars_ok" target="_blank" rel="noopener">Ver Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="nosotros">
+      <div class="container about-grid">
+        <div class="about-copy glass-card reveal">
+          <h2>Cars Cars: presencia digital con estilo premium</h2>
+          <p>En Cars &amp; Cars, agencia líder en Yerba Buena, Tucumán, te ofrecemos una experiencia única para comprar o vender tu auto o moto. Desde 0 km hasta usados de alta gama, con envíos a todo el país y un equipo de expertos listos para asesorarte.</p>
+          <p>Esta demo centraliza vehículos, beneficios, ubicación y contacto en una experiencia clara, rápida y pensada para generar consultas reales.</p>
+
+          <div class="metrics">
+            <div class="metric">
+              <strong>+12</strong>
+              <span>Imágenes destacadas</span>
+            </div>
+            <div class="metric">
+              <strong>24/7</strong>
+              <span>Consulta online</span>
+            </div>
+            <div class="metric">
+              <strong>1 click</strong>
+              <span>WhatsApp directo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-image image-box reveal">
+          <img src="https://scontent-lax3-2.cdninstagram.com/v/t51.71878-15/719900327_1514099203597811_5594132943844200469_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-lax3-2.cdninstagram.com&amp;_nc_cat=111&amp;_nc_oc=Q6cZ2gHWSaaLbEXple9Jgon9UFyPMtY8ILuxq9o4zTAyxFsmMLT4-DaL2ygw0jhAYIwUjFo&amp;_nc_ohc=MEBJRjCc9ZAQ7kNvwHF0gvw&amp;_nc_gid=p4jYH-ob0EqB7ULOd_KFVA&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af8QJB426jcA7wOsBn7s1_CyFooaqqm1sgkZb2PWL2qQdw&amp;oe=6A32AF11&amp;_nc_sid=10d13b" alt="Cars Cars imagen institucional" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vehiculos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Vehículos destacados</h2>
+          <p>Cards visuales para mostrar unidades, generar confianza y llevar al cliente directo a consultar.</p>
+        </div>
+
+        <div class="vehicles-grid">
+          
+    <article class="vehicle-card reveal">
+      <div class="vehicle-image image-box">
+        <img src="https://scontent-atl3-3.cdninstagram.com/v/t51.71878-15/717104049_27151124411220044_3120599302411160929_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-atl3-3.cdninstagram.com&amp;_nc_cat=108&amp;_nc_oc=Q6cZ2gFkHSJYny5UcHr9qedwPAXzY8CWRIipzuNLv-P-Y4tkRFDmn4Zo1NxLhN9LM7Vd0m4&amp;_nc_ohc=I1p_EK_M9YYQ7kNvwEzLKTZ&amp;_nc_gid=1Q3z5mE9e2qL91XCGB9LPQ&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af-plThXp4_6khfNxE5oYjANDmSv-zEOLE1S4xzfcXPPaQ&amp;oe=6A32D1F2&amp;_nc_sid=10d13b" alt="Yerba buena, Tucumán | Argentina • Comercializamos a..." loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+      <div class="vehicle-content">
+        <span class="badge">Disponible</span>
+        <h3>Yerba buena, Tucumán | Argentina • Comercializamos a...</h3>
+        <p>Yerba buena, Tucumán | Argentina • Comercializamos automóviles y motos 🚗 Envíos a todo el país 📍Av Aconquija 1567- YB</p>
+        <a class="mini-link" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" rel="noopener">Consultar unidad</a>
+      </div>
+    </article>
+  
+    <article class="vehicle-card reveal">
+      <div class="vehicle-image image-box">
+        <img src="https://scontent-lax3-2.cdninstagram.com/v/t51.71878-15/719900327_1514099203597811_5594132943844200469_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-lax3-2.cdninstagram.com&amp;_nc_cat=111&amp;_nc_oc=Q6cZ2gHWSaaLbEXple9Jgon9UFyPMtY8ILuxq9o4zTAyxFsmMLT4-DaL2ygw0jhAYIwUjFo&amp;_nc_ohc=MEBJRjCc9ZAQ7kNvwHF0gvw&amp;_nc_gid=p4jYH-ob0EqB7ULOd_KFVA&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af8QJB426jcA7wOsBn7s1_CyFooaqqm1sgkZb2PWL2qQdw&amp;oe=6A32AF11&amp;_nc_sid=10d13b" alt="Ford ranger raptor disponible en cars y cars #camion..." loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+      <div class="vehicle-content">
+        <span class="badge">Disponible</span>
+        <h3>Ford ranger raptor disponible en cars y cars #camion...</h3>
+        <p>Ford ranger raptor disponible en cars y cars #camionetas #autos #motos</p>
+        <a class="mini-link" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" rel="noopener">Consultar unidad</a>
+      </div>
+    </article>
+  
+    <article class="vehicle-card reveal">
+      <div class="vehicle-image image-box">
+        <img src="https://scontent-atl3-1.cdninstagram.com/v/t39.30808-6/707126011_1500287095228134_5900110855189965427_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=Cla7NNawRXEQ7kNvwElvEX_&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af_cH_ouitJ_PglQhVGu-rgMJed2Lrv-f16os18f20aHJg&amp;oe=6A32D222&amp;_nc_sid=10d13b" alt="Que dicen ustedes? Los leo! #moto #auto #camionetas" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+      <div class="vehicle-content">
+        <span class="badge">Disponible</span>
+        <h3>Que dicen ustedes? Los leo! #moto #auto #camionetas</h3>
+        <p>Que dicen ustedes? Los leo! #moto #auto #camionetas</p>
+        <a class="mini-link" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" rel="noopener">Consultar unidad</a>
+      </div>
+    </article>
+  
+    <article class="vehicle-card reveal">
+      <div class="vehicle-image image-box">
+        <img src="https://scontent-atl3-3.cdninstagram.com/v/t39.30808-6/707125739_1500287038561473_7159330745676385827_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-3.cdninstagram.com&amp;_nc_cat=109&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=PZmglLde1awQ7kNvwETPRbC&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af8cSngiHNkJLcEew_VndbB_2vxDYYLMcJ31ZtViHxR8kA&amp;oe=6A32AC0F&amp;_nc_sid=10d13b" alt="Toyota Yaris GR 1.6 · Modelo 2022 · 3.000 km" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+      <div class="vehicle-content">
+        <span class="badge">Disponible</span>
+        <h3>Toyota Yaris GR 1.6 · Modelo 2022 · 3.000 km</h3>
+        <p>Toyota Yaris GR 1.6 · Modelo 2022 · 3.000 km 📍 Av. Aconquija 1567 – Yerba Buena, Tucumán 📲 381 419 2177 / 381 508 1846 Cars &amp; Ca...</p>
+        <a class="mini-link" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" rel="noopener">Consultar unidad</a>
+      </div>
+    </article>
+  
+    <article class="vehicle-card reveal">
+      <div class="vehicle-image image-box">
+        <img src="https://scontent-atl3-1.cdninstagram.com/v/t39.30808-6/705474717_1500287165228127_506463999460887166_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_cat=103&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=U0AiZjNbh3oQ7kNvwHUcxRj&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af8THFy-LE9FjUnSMrkHfrJRrCxnhuMm7YG1S0x7nyee0A&amp;oe=6A32B4A2&amp;_nc_sid=10d13b" alt="Toyota Corolla XEI Hybrid · Modelo 2026 · 0 km" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+      <div class="vehicle-content">
+        <span class="badge">Disponible</span>
+        <h3>Toyota Corolla XEI Hybrid · Modelo 2026 · 0 km</h3>
+        <p>Toyota Corolla XEI Hybrid · Modelo 2026 · 0 km 📍 Av. Aconquija 1567 – Yerba Buena, Tucumán 📲 381 419 2177 / 381 508 1846 Cars &amp;...</p>
+        <a class="mini-link" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" rel="noopener">Consultar unidad</a>
+      </div>
+    </article>
+  
+    <article class="vehicle-card reveal">
+      <div class="vehicle-image image-box">
+        <img src="https://scontent-atl3-2.cdninstagram.com/v/t39.30808-6/707079541_1500287008561476_932496231619038254_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-2.cdninstagram.com&amp;_nc_cat=100&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=gCURassaSNYQ7kNvwHKxd3g&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af-7nKvteovnN6W8qYqbnSiUNmz8Q-pvukZASkbKNHNCYg&amp;oe=6A32C948&amp;_nc_sid=10d13b" alt="Fiat titano ranch 4x4 disponible en cars y cars. @ag..." loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+      <div class="vehicle-content">
+        <span class="badge">Disponible</span>
+        <h3>Fiat titano ranch 4x4 disponible en cars y cars. @ag...</h3>
+        <p>Fiat titano ranch 4x4 disponible en cars y cars. @agustinraw_ #auto #camionetas #motos</p>
+        <a class="mini-link" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" rel="noopener">Consultar unidad</a>
+      </div>
+    </article>
+  
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="beneficios">
+      <div class="container">
+        <div class="section-head">
+          <h2>Una web que convierte visitas en consultas</h2>
+          <p>La página ordena la información y mejora la experiencia del cliente antes de escribir por WhatsApp.</p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit reveal">
+            <div class="benefit-icon">📌</div>
+            <strong>Amplia Variedad: Autos y Motos 0 km y Usados</strong>
+            <p>Todo queda centralizado en una sola experiencia simple y profesional.</p>
+          </div>
+          <div class="benefit reveal">
+            <div class="benefit-icon">💬</div>
+            <strong>Asesoramiento Experto y Transparente</strong>
+            <p>El cliente puede consultar desde botones visibles en toda la página.</p>
+          </div>
+          <div class="benefit reveal">
+            <div class="benefit-icon">⭐</div>
+            <strong>Envíos a Todo el País</strong>
+            <p>Un diseño premium transmite mayor seguridad y valor de marca.</p>
+          </div>
+          <div class="benefit reveal">
+            <div class="benefit-icon">📍</div>
+            <strong>Vendé o Permutá Tu Vehículo Fácilmente</strong>
+            <p>Instagram, WhatsApp y ubicación integrados en una landing clara.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galeria">
+      <div class="container">
+        <div class="section-head">
+          <h2>Galería visual</h2>
+          <p>Imágenes reales para mostrar variedad, presencia y estilo del negocio.</p>
+        </div>
+
+        <div class="gallery-grid">
+          
+  <div class="gallery-item image-box reveal">
+    <img src="https://scontent-atl3-3.cdninstagram.com/v/t51.71878-15/717104049_27151124411220044_3120599302411160929_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-atl3-3.cdninstagram.com&amp;_nc_cat=108&amp;_nc_oc=Q6cZ2gFkHSJYny5UcHr9qedwPAXzY8CWRIipzuNLv-P-Y4tkRFDmn4Zo1NxLhN9LM7Vd0m4&amp;_nc_ohc=I1p_EK_M9YYQ7kNvwEzLKTZ&amp;_nc_gid=1Q3z5mE9e2qL91XCGB9LPQ&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af-plThXp4_6khfNxE5oYjANDmSv-zEOLE1S4xzfcXPPaQ&amp;oe=6A32D1F2&amp;_nc_sid=10d13b" alt="Galería 1 Cars Cars" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://scontent-lax3-2.cdninstagram.com/v/t51.71878-15/719900327_1514099203597811_5594132943844200469_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-lax3-2.cdninstagram.com&amp;_nc_cat=111&amp;_nc_oc=Q6cZ2gHWSaaLbEXple9Jgon9UFyPMtY8ILuxq9o4zTAyxFsmMLT4-DaL2ygw0jhAYIwUjFo&amp;_nc_ohc=MEBJRjCc9ZAQ7kNvwHF0gvw&amp;_nc_gid=p4jYH-ob0EqB7ULOd_KFVA&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af8QJB426jcA7wOsBn7s1_CyFooaqqm1sgkZb2PWL2qQdw&amp;oe=6A32AF11&amp;_nc_sid=10d13b" alt="Galería 2 Cars Cars" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://scontent-atl3-1.cdninstagram.com/v/t39.30808-6/707126011_1500287095228134_5900110855189965427_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=Cla7NNawRXEQ7kNvwElvEX_&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af_cH_ouitJ_PglQhVGu-rgMJed2Lrv-f16os18f20aHJg&amp;oe=6A32D222&amp;_nc_sid=10d13b" alt="Galería 3 Cars Cars" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://scontent-atl3-3.cdninstagram.com/v/t39.30808-6/707125739_1500287038561473_7159330745676385827_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-3.cdninstagram.com&amp;_nc_cat=109&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=PZmglLde1awQ7kNvwETPRbC&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af8cSngiHNkJLcEew_VndbB_2vxDYYLMcJ31ZtViHxR8kA&amp;oe=6A32AC0F&amp;_nc_sid=10d13b" alt="Galería 4 Cars Cars" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://scontent-atl3-1.cdninstagram.com/v/t39.30808-6/705474717_1500287165228127_506463999460887166_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_cat=103&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=U0AiZjNbh3oQ7kNvwHUcxRj&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af8THFy-LE9FjUnSMrkHfrJRrCxnhuMm7YG1S0x7nyee0A&amp;oe=6A32B4A2&amp;_nc_sid=10d13b" alt="Galería 5 Cars Cars" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://scontent-atl3-2.cdninstagram.com/v/t39.30808-6/707079541_1500287008561476_932496231619038254_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-2.cdninstagram.com&amp;_nc_cat=100&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=gCURassaSNYQ7kNvwHKxd3g&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af-7nKvteovnN6W8qYqbnSiUNmz8Q-pvukZASkbKNHNCYg&amp;oe=6A32C948&amp;_nc_sid=10d13b" alt="Galería 6 Cars Cars" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://scontent-atl3-3.cdninstagram.com/v/t39.30808-6/707173289_1500287158561461_306388672894189459_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-3.cdninstagram.com&amp;_nc_cat=109&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=wN2lFpDLXaIQ7kNvwHnOYc-&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af_1qBWwIT_8zGIsUsQHdu8Lo4e8PHOSWi-a8jSQgcOXrg&amp;oe=6A32B031&amp;_nc_sid=10d13b" alt="Galería 7 Cars Cars" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://scontent-atl3-2.cdninstagram.com/v/t39.30808-6/707278733_1500287155228128_4996325918628200972_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-2.cdninstagram.com&amp;_nc_cat=100&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=FvOWwx6xBiQQ7kNvwGOj7qE&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af871QNr2hZcp6Pj-n2DIa_36JU36Ro4FMpcImoJu-RlrA&amp;oe=6A32C2C6&amp;_nc_sid=10d13b" alt="Galería 8 Cars Cars" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://scontent-atl3-2.cdninstagram.com/v/t39.30808-6/707348171_1500287088561468_2339839200044219644_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-atl3-2.cdninstagram.com&amp;_nc_cat=100&amp;_nc_oc=Q6cZ2gHz04aIXlsWDX3vXrHSuCTqShkA1ixt_t6weOTJPIE4XmhciP0BD-tpoLFAtwH1a64&amp;_nc_ohc=6YwrHGT777oQ7kNvwHIfUWS&amp;_nc_gid=p7T_cmRp9E6lYqCI7uMwLA&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af8cFJ43k4FqSJWDnKok7QIIIqEpYA2zAAFKy608eOdtrw&amp;oe=6A32D6F6&amp;_nc_sid=10d13b" alt="Galería 9 Cars Cars" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://instagram.fagc1-1.fna.fbcdn.net/v/t39.30808-6/719427603_1514824427107734_336013267790781051_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=instagram.fagc1-1.fna.fbcdn.net&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gELaJ2b23stbHoCE8NqM70tphxfHYqc8fE-cGzTy5Gvf5mZHKoguGvKrof_re9tENI&amp;_nc_ohc=_RYtZxY5L5QQ7kNvwFSPye-&amp;_nc_gid=EqSrwqOxb4jFtKe3IpFF5g&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af9B6osQPQYv_RNh8QbaNpQCj6_DBjyS_uyq1y4M_v4PFQ&amp;oe=6A32C447&amp;_nc_sid=10d13b" alt="Galería 10 Cars Cars" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="container contact-grid">
+        <div class="contact-card reveal">
+          <h2>Visitá el negocio o consultá online</h2>
+          <p>Ubicación detectada: <strong>Cars&amp;Cars</strong></p>
+          <p>Los clientes pueden consultar por WhatsApp, ver el Instagram o ubicar el negocio desde el mapa integrado.</p>
+
+          <div class="social-row">
+            <a class="btn btn-primary" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn btn-ghost" href="https://www.instagram.com/carscars_ok" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+
+        <div class="map-box reveal">
+          <iframe src="https://www.google.com/maps?q=Cars%26Cars&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de Cars Cars"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Cars Cars · Demo de landing page profesional creada para mostrar potencial comercial.
+    </div>
+  </footer>
+
+  <a class="float-whatsapp" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
+      <path d="M16.02 3C8.86 3 3.04 8.72 3.04 15.75c0 2.5.74 4.82 2.02 6.79L3 29l6.66-2.02A13.1 13.1 0 0 0 16.02 28C23.18 28 29 22.28 29 15.25S23.18 3 16.02 3Zm0 22.74c-2.05 0-3.95-.6-5.55-1.64l-.4-.26-3.96 1.2 1.25-3.82-.27-.42a10.35 10.35 0 0 1-1.74-5.05c0-5.77 4.78-10.47 10.67-10.47s10.67 4.7 10.67 10.47-4.78 9.99-10.67 9.99Z"/>
+    </svg>
+  </a>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
