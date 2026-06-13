@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cars Cars | Landing page de presentación</title>
+  <meta name="description" content="Landing page de presentación para Cars Cars. Diseño moderno, galería, ubicación y contacto.">
+
+  <style>
+    :root {
+      --bg: #07090d;
+      --bg-2: #0d1118;
+      --surface: rgba(255,255,255,.075);
+      --surface-2: rgba(255,255,255,.11);
+      --card: #111822;
+      --card-2: #151f2c;
+      --text: #f5f7fb;
+      --muted: #aeb8c7;
+      --line: rgba(255,255,255,.12);
+      --accent: #1098ff;
+      --accent-2: #00d4ff;
+      --gold: #d9b56f;
+      --whatsapp: #25d366;
+      --instagram-1: #f58529;
+      --instagram-2: #dd2a7b;
+      --instagram-3: #8134af;
+      --radius: 26px;
+      --shadow: 0 28px 90px rgba(0,0,0,.46);
+      --shadow-soft: 0 18px 50px rgba(0,0,0,.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(16,152,255,.22), transparent 32%),
+        radial-gradient(circle at 82% 12%, rgba(217,181,111,.12), transparent 35%),
+        linear-gradient(180deg, #05070a 0%, #0d1118 45%, #07090d 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 82px;
+      z-index: 50;
+      background: rgba(7, 9, 13, .72);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .logo-wrap {
+      width: 54px;
+      height: 54px;
+      border-radius: 19px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(16,152,255,.92), rgba(0,212,255,.8)),
+        #111;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 42px rgba(16,152,255,.25);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      min-height: 54px;
+    }
+
+    .logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .logo-fallback {
+      display: none;
+      font-weight: 1000;
+      letter-spacing: -.05em;
+      font-size: 1rem;
+      color: white;
+    }
+
+    .logo-wrap.image-error img {
+      display: none;
+    }
+
+    .logo-wrap.image-error .logo-fallback {
+      display: block;
+    }
+
+    .logo-wrap.image-error::after {
+      content: none;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .brand-name {
+      font-size: 1.25rem;
+      font-weight: 1000;
+      letter-spacing: -.04em;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: .94rem;
+      font-weight: 800;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: .25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: .25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding-top: 82px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.12) contrast(1.08);
+      transform: scale(1.03);
+      animation: heroZoom 18s ease-in-out infinite alternate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(5,7,10,.96) 0%, rgba(5,7,10,.74) 50%, rgba(5,7,10,.32) 100%),
+        linear-gradient(180deg, rgba(5,7,10,.08) 0%, #07090d 100%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -160px;
+      bottom: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16,152,255,.32), transparent 62%);
+      z-index: -1;
+      filter: blur(4px);
+      animation: floatGlow 7s ease-in-out infinite;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.03); }
+      to { transform: scale(1.10); }
+    }
+
+    @keyframes floatGlow {
+      0%, 100% { transform: translateY(0); opacity: .75; }
+      50% { transform: translateY(-22px); opacity: 1; }
+    }
+
+    .hero-content {
+      max-width: 850px;
+      padding: 100px 0 70px;
+      animation: fadeUp .9s ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(16,152,255,.12);
+      border: 1px solid rgba(16,152,255,.30);
+      color: #d8efff;
+      font-weight: 900;
+      font-size: .9rem;
+      margin-bottom: 24px;
+      box-shadow: 0 16px 40px rgba(16,152,255,.12);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 7.2vw, 6.3rem);
+      line-height: .94;
+      letter-spacing: -.075em;
+      margin-bottom: 22px;
+      max-width: 950px;
+      text-shadow: 0 20px 70px rgba(0,0,0,.5);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.75;
+      max-width: 720px;
+      margin-bottom: 34px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      min-height: 54px;
+      padding: 15px 24px;
+      border-radius: 16px;
+      font-weight: 1000;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: .25s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 20px 45px rgba(16,152,255,.26);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 26px 70px rgba(16,152,255,.38);
+    }
+
+    .btn-ghost {
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      backdrop-filter: blur(14px);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.14);
+    }
+
+    .section {
+      padding: 105px 0;
+      position: relative;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.1rem, 4vw, 3.6rem);
+      letter-spacing: -.055em;
+      line-height: 1;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .glass-card {
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .about-copy {
+      padding: 36px;
+    }
+
+    .about-copy h2 {
+      font-size: clamp(1.9rem, 3.5vw, 3.1rem);
+      letter-spacing: -.045em;
+      margin-bottom: 18px;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+
+    .about-image {
+      min-height: 470px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .about-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: .45s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.06);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .benefit {
+      padding: 28px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      transition: .25s ease;
+    }
+
+    .benefit:hover {
+      transform: translateY(-7px);
+      background: rgba(255,255,255,.10);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .benefit-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(16,152,255,.22), rgba(0,212,255,.14));
+      margin-bottom: 18px;
+      font-size: 1.35rem;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .benefit p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .feature-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      overflow: hidden;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 70px rgba(0,0,0,.28);
+      transition: .28s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(16,152,255,.38);
+      box-shadow: 0 30px 90px rgba(0,0,0,.38);
+    }
+
+    .feature-image {
+      height: 230px;
+      overflow: hidden;
+      background: var(--card-2);
+    }
+
+    .feature-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: .45s ease;
+    }
+
+    .feature-card:hover .feature-image img {
+      transform: scale(1.08);
+    }
+
+    .feature-content {
+      padding: 24px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(217,181,111,.13);
+      border: 1px solid rgba(217,181,111,.28);
+      color: #ffe5a8;
+      font-size: .78rem;
+      font-weight: 1000;
+      margin-bottom: 15px;
+    }
+
+    .feature-content h3 {
+      font-size: 1.15rem;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: -.025em;
+    }
+
+    .feature-content p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      height: 240px;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--card-2);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(6) {
+      grid-column: span 2;
+    }
+
+    .gallery-item img {
+      height: 100%;
+      object-fit: cover;
+      transition: .45s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+      filter: saturate(1.12) contrast(1.08);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .contact-card {
+      padding: 34px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at top right, rgba(16,152,255,.20), transparent 38%),
+        linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.035));
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h2 {
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
+      letter-spacing: -.05em;
+      margin-bottom: 16px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 22px;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .social-btn {
+      min-height: 54px;
+      padding: 15px 22px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: white;
+      font-weight: 1000;
+      transition: .25s ease;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .social-btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .whatsapp-btn {
+      background: var(--whatsapp);
+    }
+
+    .instagram-btn {
+      background: linear-gradient(135deg, var(--instagram-1), var(--instagram-2), var(--instagram-3));
+    }
+
+    .map-box {
+      min-height: 430px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: var(--card);
+    }
+
+    .map-box iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(.15) contrast(1.05);
+    }
+
+    .footer {
+      padding: 36px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .image-error {
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(135deg, rgba(16,152,255,.16), rgba(217,181,111,.10)),
+        #111822;
+      min-height: 100%;
+    }
+
+    .image-error::after {
+      content: "Imagen no disponible";
+      color: var(--muted);
+      font-weight: 900;
+      font-size: .92rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp .75s ease forwards;
+    }
+
+    .reveal:nth-child(2) { animation-delay: .08s; }
+    .reveal:nth-child(3) { animation-delay: .16s; }
+    .reveal:nth-child(4) { animation-delay: .24s; }
+    .reveal:nth-child(5) { animation-delay: .32s; }
+    .reveal:nth-child(6) { animation-delay: .40s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .feature-cards,
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .hero {
+        min-height: 88vh;
+      }
+
+      .hero-content {
+        padding: 80px 0 56px;
+      }
+
+      .feature-cards,
+      .features-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item,
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(6) {
+        grid-column: auto;
+      }
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head h2 {
+        margin-bottom: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#hero">
+        <span class="logo-wrap ">
+          <img src="https://images.weserv.nl/?url=scontent-mia3-1.cdninstagram.com%2Fv%2Ft51.82787-19%2F519605705_18282956869252074_4183538261967100659_n.jpg%3Fstp%3Ddst-jpg_e0_s150x150_tt6%26efg%3DeyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0%26_nc_ht%3Dscontent-mia3-1.cdninstagram.com%26_nc_cat%3D106%26_nc_oc%3DQ6cZ2gHA1RXnlIUFbINzC33ah_TRGVkpRqn8Fcu8fKjksnMYPZVEFdWfeEPVGMqkHq4B78c%26_nc_ohc%3DY3RXgLs8zJMQ7kNvwGnMsJG%26_nc_gid%3DcNUfAvSWGB4SbmRO6RPovQ%26edm%3DAOQ1c0wBAAAA%26ccb%3D7-5%26oh%3D00_Af88GPV6IqBJvuM_dsyO5eNZPhrvJgfbzGuwuBWeyBxi7A%26oe%3D6A32BC07%26_nc_sid%3D8b3546&amp;w=1600&amp;output=webp" data-original-src="https://scontent-mia3-1.cdninstagram.com/v/t51.82787-19/519605705_18282956869252074_4183538261967100659_n.jpg?stp=dst-jpg_e0_s150x150_tt6&amp;efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&amp;_nc_ht=scontent-mia3-1.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gHA1RXnlIUFbINzC33ah_TRGVkpRqn8Fcu8fKjksnMYPZVEFdWfeEPVGMqkHq4B78c&amp;_nc_ohc=Y3RXgLs8zJMQ7kNvwGnMsJG&amp;_nc_gid=cNUfAvSWGB4SbmRO6RPovQ&amp;edm=AOQ1c0wBAAAA&amp;ccb=7-5&amp;oh=00_Af88GPV6IqBJvuM_dsyO5eNZPhrvJgfbzGuwuBWeyBxi7A&amp;oe=6A32BC07&amp;_nc_sid=8b3546" alt="Cars Cars logo" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+          <span class="logo-fallback">CC</span>
+        </span>
+
+        <span class="brand-text">
+          <span class="brand-name">Cars Cars</span>
+          <span class="brand-sub">Landing page de presentación</span>
+        </span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#hero">Inicio</a>
+        <a href="#presentacion">Presentación</a>
+        <a href="#destacados">Destacados</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-bg image-box">
+        <img src="https://images.weserv.nl/?url=scontent-iad3-2.cdninstagram.com%2Fv%2Ft51.71878-15%2F719900327_1514099203597811_5594132943844200469_n.jpg%3Fstp%3Ddst-jpg_e15_tt6%26_nc_ht%3Dscontent-iad3-2.cdninstagram.com%26_nc_cat%3D111%26_nc_oc%3DQ6cZ2gGJ9A3ofZ6eLFEahbMNYo0Wdaj_JfsiB6zxsIW1p5rc5lNa5wWGXW9OWszKK543N_Y%26_nc_ohc%3DMEBJRjCc9ZAQ7kNvwEH2NjA%26_nc_gid%3DG4lCI74Rzo23HDaNDk5G8w%26edm%3DAPs17CUBAAAA%26ccb%3D7-5%26oh%3D00_Af-Aj6j7Dxeu3kARxQF66DjOw4KupCqvGzbSSbIT9tpgVQ%26oe%3D6A32AF11%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-iad3-2.cdninstagram.com/v/t51.71878-15/719900327_1514099203597811_5594132943844200469_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-iad3-2.cdninstagram.com&amp;_nc_cat=111&amp;_nc_oc=Q6cZ2gGJ9A3ofZ6eLFEahbMNYo0Wdaj_JfsiB6zxsIW1p5rc5lNa5wWGXW9OWszKK543N_Y&amp;_nc_ohc=MEBJRjCc9ZAQ7kNvwEH2NjA&amp;_nc_gid=G4lCI74Rzo23HDaNDk5G8w&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af-Aj6j7Dxeu3kARxQF66DjOw4KupCqvGzbSSbIT9tpgVQ&amp;oe=6A32AF11&amp;_nc_sid=10d13b" alt="Cars Cars presentación" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+
+      <div class="container hero-content">
+        <div class="eyebrow">Landing page de presentación · Cars&amp;Cars</div>
+        <h1>Cars Cars: Tu próximo vehículo te espera</h1>
+        <p>Encontrá el auto o la moto de tus sueños o vendé el tuyo con la mayor facilidad y confianza.</p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#presentacion">Contactanos ahora</a>
+          <a class="btn btn-ghost" href="#contacto">Ver contacto</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="presentacion">
+      <div class="container about-grid">
+        <div class="about-copy glass-card reveal">
+          <h2>Cars Cars en una presentación clara, moderna y profesional</h2>
+          <p>En Cars Cars, somos tu aliado estratégico en la compra y venta de vehículos en Yerba Buena, Tucumán, y con envíos a todo el país. Con una amplia gama de autos y motos, te ofrecemos un servicio transparente y personalizado para que cada transacción sea una experiencia excepcional.</p>
+          <p>Esta demo muestra cómo una página propia puede ordenar la información, reforzar la confianza y facilitar que las personas encuentren rápidamente lo que necesitan.</p>
+        </div>
+
+        <div class="about-image image-box reveal">
+          <img src="https://images.weserv.nl/?url=scontent-iad6-1.cdninstagram.com%2Fv%2Ft51.71878-15%2F705270128_1421980899946699_4350966865459828204_n.jpg%3Fstp%3Ddst-jpg_e15_tt6%26_nc_ht%3Dscontent-iad6-1.cdninstagram.com%26_nc_cat%3D107%26_nc_oc%3DQ6cZ2gEfItFL3NW3Wu9rwK3s65cjCBBuUy6U0_X3ireDrVbHnXxshN2kI0kK4TcNPMLp_Sk%26_nc_ohc%3DC4shLDTNv2IQ7kNvwGESrha%26_nc_gid%3DJ5tDGJCnONOHDyQVYmHuXA%26edm%3DAPs17CUBAAAA%26ccb%3D7-5%26oh%3D00_Af_6ubnZUu7gdsotVx5Ml62G_JdQUoS5aLjOOHQeZBN3hA%26oe%3D6A32BFD2%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-iad6-1.cdninstagram.com/v/t51.71878-15/705270128_1421980899946699_4350966865459828204_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-iad6-1.cdninstagram.com&amp;_nc_cat=107&amp;_nc_oc=Q6cZ2gEfItFL3NW3Wu9rwK3s65cjCBBuUy6U0_X3ireDrVbHnXxshN2kI0kK4TcNPMLp_Sk&amp;_nc_ohc=C4shLDTNv2IQ7kNvwGESrha&amp;_nc_gid=J5tDGJCnONOHDyQVYmHuXA&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af_6ubnZUu7gdsotVx5Ml62G_JdQUoS5aLjOOHQeZBN3hA&amp;oe=6A32BFD2&amp;_nc_sid=10d13b" alt="Cars Cars imagen de presentación" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="beneficios">
+      <div class="container">
+        <div class="section-head">
+          <h2>Beneficios de una landing profesional</h2>
+          <p>Una página de presentación ayuda a mostrar mejor el negocio y convertir visitas en consultas reales.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="benefit reveal">
+            <div class="benefit-icon">✨</div>
+            <strong>Envíos a todo el país: Llevamos tu nuevo vehículo donde estés, sin límites geográficos.</strong>
+            <p>Una identidad digital más ordenada y confiable.</p>
+          </div>
+
+          <div class="benefit reveal">
+            <div class="benefit-icon">📱</div>
+            <strong>Amplia variedad de modelos: Desde 0km hasta clásicos, la mejor selección de autos y motos te espera.</strong>
+            <p>Diseño adaptable a celulares, tablets y escritorio.</p>
+          </div>
+
+          <div class="benefit reveal">
+            <div class="benefit-icon">📍</div>
+            <strong>Venta de tu auto sin complicaciones: Evaluación justa y asesoramiento experto para vender tu vehículo de forma rápida y segura.</strong>
+            <p>Ubicación y contacto integrados en una sola página.</p>
+          </div>
+
+          <div class="benefit reveal">
+            <div class="benefit-icon">🚀</div>
+            <strong>Atención personalizada y confianza: Un equipo dedicado a entender tus necesidades y asegurar tu satisfacción en cada paso.</strong>
+            <p>Una experiencia visual más profesional para nuevos clientes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="destacados">
+      <div class="container">
+        <div class="section-head">
+          <h2>Presentación destacada</h2>
+          <p>Imágenes reales del negocio organizadas en un diseño visual, limpio y vendedor.</p>
+        </div>
+
+        <div class="feature-cards">
+          
+    <article class="feature-card reveal">
+      <div class="feature-image image-box">
+        <img src="https://images.weserv.nl/?url=scontent-iad3-2.cdninstagram.com%2Fv%2Ft51.71878-15%2F719900327_1514099203597811_5594132943844200469_n.jpg%3Fstp%3Ddst-jpg_e15_tt6%26_nc_ht%3Dscontent-iad3-2.cdninstagram.com%26_nc_cat%3D111%26_nc_oc%3DQ6cZ2gGJ9A3ofZ6eLFEahbMNYo0Wdaj_JfsiB6zxsIW1p5rc5lNa5wWGXW9OWszKK543N_Y%26_nc_ohc%3DMEBJRjCc9ZAQ7kNvwEH2NjA%26_nc_gid%3DG4lCI74Rzo23HDaNDk5G8w%26edm%3DAPs17CUBAAAA%26ccb%3D7-5%26oh%3D00_Af-Aj6j7Dxeu3kARxQF66DjOw4KupCqvGzbSSbIT9tpgVQ%26oe%3D6A32AF11%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-iad3-2.cdninstagram.com/v/t51.71878-15/719900327_1514099203597811_5594132943844200469_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-iad3-2.cdninstagram.com&amp;_nc_cat=111&amp;_nc_oc=Q6cZ2gGJ9A3ofZ6eLFEahbMNYo0Wdaj_JfsiB6zxsIW1p5rc5lNa5wWGXW9OWszKK543N_Y&amp;_nc_ohc=MEBJRjCc9ZAQ7kNvwEH2NjA&amp;_nc_gid=G4lCI74Rzo23HDaNDk5G8w&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af-Aj6j7Dxeu3kARxQF66DjOw4KupCqvGzbSSbIT9tpgVQ&amp;oe=6A32AF11&amp;_nc_sid=10d13b" alt="Yerba buena, Tucumán | Argentina • Comercializamos a..." loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+      <div class="feature-content">
+        <span class="badge">Destacado</span>
+        <h3>Yerba buena, Tucumán | Argentina • Comercializamos a...</h3>
+        <p>Yerba buena, Tucumán | Argentina • Comercializamos automóviles y motos 🚗 Envíos a todo el país 📍Av Aconquija 1567- YB</p>
+      </div>
+    </article>
+  
+    <article class="feature-card reveal">
+      <div class="feature-image image-box">
+        <img src="https://images.weserv.nl/?url=scontent-iad6-1.cdninstagram.com%2Fv%2Ft51.71878-15%2F705270128_1421980899946699_4350966865459828204_n.jpg%3Fstp%3Ddst-jpg_e15_tt6%26_nc_ht%3Dscontent-iad6-1.cdninstagram.com%26_nc_cat%3D107%26_nc_oc%3DQ6cZ2gEfItFL3NW3Wu9rwK3s65cjCBBuUy6U0_X3ireDrVbHnXxshN2kI0kK4TcNPMLp_Sk%26_nc_ohc%3DC4shLDTNv2IQ7kNvwGESrha%26_nc_gid%3DJ5tDGJCnONOHDyQVYmHuXA%26edm%3DAPs17CUBAAAA%26ccb%3D7-5%26oh%3D00_Af_6ubnZUu7gdsotVx5Ml62G_JdQUoS5aLjOOHQeZBN3hA%26oe%3D6A32BFD2%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-iad6-1.cdninstagram.com/v/t51.71878-15/705270128_1421980899946699_4350966865459828204_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-iad6-1.cdninstagram.com&amp;_nc_cat=107&amp;_nc_oc=Q6cZ2gEfItFL3NW3Wu9rwK3s65cjCBBuUy6U0_X3ireDrVbHnXxshN2kI0kK4TcNPMLp_Sk&amp;_nc_ohc=C4shLDTNv2IQ7kNvwGESrha&amp;_nc_gid=J5tDGJCnONOHDyQVYmHuXA&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af_6ubnZUu7gdsotVx5Ml62G_JdQUoS5aLjOOHQeZBN3hA&amp;oe=6A32BFD2&amp;_nc_sid=10d13b" alt="Que dicen ustedes? Los leo! #moto #auto #camionetas" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+      <div class="feature-content">
+        <span class="badge">Destacado</span>
+        <h3>Que dicen ustedes? Los leo! #moto #auto #camionetas</h3>
+        <p>Que dicen ustedes? Los leo! #moto #auto #camionetas</p>
+      </div>
+    </article>
+  
+    <article class="feature-card reveal">
+      <div class="feature-image image-box">
+        <img src="https://images.weserv.nl/?url=scontent-phl2-1.cdninstagram.com%2Fv%2Ft39.30808-6%2F720126404_1514877753769068_5674414045476080508_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh2.08_tt6%26_nc_ht%3Dscontent-phl2-1.cdninstagram.com%26_nc_cat%3D100%26_nc_oc%3DQ6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I%26_nc_ohc%3DF5IvZx8PX5AQ7kNvwF_fLFH%26_nc_gid%3DGC_myqSuI-dhgx0HTyKI_Q%26edm%3DAPs17CUAAAAA%26ccb%3D7-5%26oh%3D00_Af_IMq5prDD33q87zD-AKAe3qiew3egKm_7TAPl4_0lhTg%26oe%3D6A32D5BE%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/720126404_1514877753769068_5674414045476080508_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-phl2-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_oc=Q6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I&amp;_nc_ohc=F5IvZx8PX5AQ7kNvwF_fLFH&amp;_nc_gid=GC_myqSuI-dhgx0HTyKI_Q&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af_IMq5prDD33q87zD-AKAe3qiew3egKm_7TAPl4_0lhTg&amp;oe=6A32D5BE&amp;_nc_sid=10d13b" alt="Si estás pensando en cambiar o vender tu auto, trael..." loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+      <div class="feature-content">
+        <span class="badge">Destacado</span>
+        <h3>Si estás pensando en cambiar o vender tu auto, trael...</h3>
+        <p>Si estás pensando en cambiar o vender tu auto, traelo a Cars &amp; Cars. Lo vemos, lo evaluamos y te contamos cómo podemos ayudarte co...</p>
+      </div>
+    </article>
+  
+    <article class="feature-card reveal">
+      <div class="feature-image image-box">
+        <img src="https://images.weserv.nl/?url=scontent-phl2-1.cdninstagram.com%2Fv%2Ft39.30808-6%2F719939768_1514877893769054_3455501401163990245_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh2.08_tt6%26_nc_ht%3Dscontent-phl2-1.cdninstagram.com%26_nc_cat%3D106%26_nc_oc%3DQ6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I%26_nc_ohc%3DTW2aPnjzJzkQ7kNvwGkoCeV%26_nc_gid%3DGC_myqSuI-dhgx0HTyKI_Q%26edm%3DAPs17CUAAAAA%26ccb%3D7-5%26oh%3D00_Af-pr7mdZ71SGlMZquXikZPJB6VH4WrsmnK_Ygqxlwdn5w%26oe%3D6A32C07E%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/719939768_1514877893769054_3455501401163990245_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-phl2-1.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I&amp;_nc_ohc=TW2aPnjzJzkQ7kNvwGkoCeV&amp;_nc_gid=GC_myqSuI-dhgx0HTyKI_Q&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af-pr7mdZ71SGlMZquXikZPJB6VH4WrsmnK_Ygqxlwdn5w&amp;oe=6A32C07E&amp;_nc_sid=10d13b" alt="Volkswagen Nivus Comfortline AT · Modelo 2026 · 10.0..." loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+      </div>
+      <div class="feature-content">
+        <span class="badge">Destacado</span>
+        <h3>Volkswagen Nivus Comfortline AT · Modelo 2026 · 10.0...</h3>
+        <p>Volkswagen Nivus Comfortline AT · Modelo 2026 · 10.000 km 📍 Av. Aconquija 1567 – Yerba Buena, Tucumán 📲 381 419 2177 / 381 508 1...</p>
+      </div>
+    </article>
+  
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galeria">
+      <div class="container">
+        <div class="section-head">
+          <h2>Galería visual</h2>
+          <p>Una selección de imágenes para reforzar presencia, estilo y confianza.</p>
+        </div>
+
+        <div class="gallery-grid">
+          
+  <div class="gallery-item image-box reveal">
+    <img src="https://images.weserv.nl/?url=scontent-iad3-2.cdninstagram.com%2Fv%2Ft51.71878-15%2F719900327_1514099203597811_5594132943844200469_n.jpg%3Fstp%3Ddst-jpg_e15_tt6%26_nc_ht%3Dscontent-iad3-2.cdninstagram.com%26_nc_cat%3D111%26_nc_oc%3DQ6cZ2gGJ9A3ofZ6eLFEahbMNYo0Wdaj_JfsiB6zxsIW1p5rc5lNa5wWGXW9OWszKK543N_Y%26_nc_ohc%3DMEBJRjCc9ZAQ7kNvwEH2NjA%26_nc_gid%3DG4lCI74Rzo23HDaNDk5G8w%26edm%3DAPs17CUBAAAA%26ccb%3D7-5%26oh%3D00_Af-Aj6j7Dxeu3kARxQF66DjOw4KupCqvGzbSSbIT9tpgVQ%26oe%3D6A32AF11%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-iad3-2.cdninstagram.com/v/t51.71878-15/719900327_1514099203597811_5594132943844200469_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-iad3-2.cdninstagram.com&amp;_nc_cat=111&amp;_nc_oc=Q6cZ2gGJ9A3ofZ6eLFEahbMNYo0Wdaj_JfsiB6zxsIW1p5rc5lNa5wWGXW9OWszKK543N_Y&amp;_nc_ohc=MEBJRjCc9ZAQ7kNvwEH2NjA&amp;_nc_gid=G4lCI74Rzo23HDaNDk5G8w&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af-Aj6j7Dxeu3kARxQF66DjOw4KupCqvGzbSSbIT9tpgVQ&amp;oe=6A32AF11&amp;_nc_sid=10d13b" alt="Imagen 1 de Cars Cars" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://images.weserv.nl/?url=scontent-iad6-1.cdninstagram.com%2Fv%2Ft51.71878-15%2F705270128_1421980899946699_4350966865459828204_n.jpg%3Fstp%3Ddst-jpg_e15_tt6%26_nc_ht%3Dscontent-iad6-1.cdninstagram.com%26_nc_cat%3D107%26_nc_oc%3DQ6cZ2gEfItFL3NW3Wu9rwK3s65cjCBBuUy6U0_X3ireDrVbHnXxshN2kI0kK4TcNPMLp_Sk%26_nc_ohc%3DC4shLDTNv2IQ7kNvwGESrha%26_nc_gid%3DJ5tDGJCnONOHDyQVYmHuXA%26edm%3DAPs17CUBAAAA%26ccb%3D7-5%26oh%3D00_Af_6ubnZUu7gdsotVx5Ml62G_JdQUoS5aLjOOHQeZBN3hA%26oe%3D6A32BFD2%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-iad6-1.cdninstagram.com/v/t51.71878-15/705270128_1421980899946699_4350966865459828204_n.jpg?stp=dst-jpg_e15_tt6&amp;_nc_ht=scontent-iad6-1.cdninstagram.com&amp;_nc_cat=107&amp;_nc_oc=Q6cZ2gEfItFL3NW3Wu9rwK3s65cjCBBuUy6U0_X3ireDrVbHnXxshN2kI0kK4TcNPMLp_Sk&amp;_nc_ohc=C4shLDTNv2IQ7kNvwGESrha&amp;_nc_gid=J5tDGJCnONOHDyQVYmHuXA&amp;edm=APs17CUBAAAA&amp;ccb=7-5&amp;oh=00_Af_6ubnZUu7gdsotVx5Ml62G_JdQUoS5aLjOOHQeZBN3hA&amp;oe=6A32BFD2&amp;_nc_sid=10d13b" alt="Imagen 2 de Cars Cars" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://images.weserv.nl/?url=scontent-phl2-1.cdninstagram.com%2Fv%2Ft39.30808-6%2F720126404_1514877753769068_5674414045476080508_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh2.08_tt6%26_nc_ht%3Dscontent-phl2-1.cdninstagram.com%26_nc_cat%3D100%26_nc_oc%3DQ6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I%26_nc_ohc%3DF5IvZx8PX5AQ7kNvwF_fLFH%26_nc_gid%3DGC_myqSuI-dhgx0HTyKI_Q%26edm%3DAPs17CUAAAAA%26ccb%3D7-5%26oh%3D00_Af_IMq5prDD33q87zD-AKAe3qiew3egKm_7TAPl4_0lhTg%26oe%3D6A32D5BE%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/720126404_1514877753769068_5674414045476080508_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-phl2-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_oc=Q6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I&amp;_nc_ohc=F5IvZx8PX5AQ7kNvwF_fLFH&amp;_nc_gid=GC_myqSuI-dhgx0HTyKI_Q&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af_IMq5prDD33q87zD-AKAe3qiew3egKm_7TAPl4_0lhTg&amp;oe=6A32D5BE&amp;_nc_sid=10d13b" alt="Imagen 3 de Cars Cars" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://images.weserv.nl/?url=scontent-phl2-1.cdninstagram.com%2Fv%2Ft39.30808-6%2F719939768_1514877893769054_3455501401163990245_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh2.08_tt6%26_nc_ht%3Dscontent-phl2-1.cdninstagram.com%26_nc_cat%3D106%26_nc_oc%3DQ6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I%26_nc_ohc%3DTW2aPnjzJzkQ7kNvwGkoCeV%26_nc_gid%3DGC_myqSuI-dhgx0HTyKI_Q%26edm%3DAPs17CUAAAAA%26ccb%3D7-5%26oh%3D00_Af-pr7mdZ71SGlMZquXikZPJB6VH4WrsmnK_Ygqxlwdn5w%26oe%3D6A32C07E%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/719939768_1514877893769054_3455501401163990245_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-phl2-1.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I&amp;_nc_ohc=TW2aPnjzJzkQ7kNvwGkoCeV&amp;_nc_gid=GC_myqSuI-dhgx0HTyKI_Q&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af-pr7mdZ71SGlMZquXikZPJB6VH4WrsmnK_Ygqxlwdn5w&amp;oe=6A32C07E&amp;_nc_sid=10d13b" alt="Imagen 4 de Cars Cars" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://images.weserv.nl/?url=scontent-phl2-1.cdninstagram.com%2Fv%2Ft39.30808-6%2F719425699_1514877853769058_2679611711244317026_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh2.08_tt6%26_nc_ht%3Dscontent-phl2-1.cdninstagram.com%26_nc_cat%3D106%26_nc_oc%3DQ6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I%26_nc_ohc%3DnXscPelPMqMQ7kNvwGLf6h1%26_nc_gid%3DGC_myqSuI-dhgx0HTyKI_Q%26edm%3DAPs17CUAAAAA%26ccb%3D7-5%26oh%3D00_Af_M08bQw_d1hWQRq1xdyj7Q3k7AImDTcaog0-46NS4ayA%26oe%3D6A32C0EC%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/719425699_1514877853769058_2679611711244317026_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-phl2-1.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I&amp;_nc_ohc=nXscPelPMqMQ7kNvwGLf6h1&amp;_nc_gid=GC_myqSuI-dhgx0HTyKI_Q&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af_M08bQw_d1hWQRq1xdyj7Q3k7AImDTcaog0-46NS4ayA&amp;oe=6A32C0EC&amp;_nc_sid=10d13b" alt="Imagen 5 de Cars Cars" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://images.weserv.nl/?url=scontent-phl2-1.cdninstagram.com%2Fv%2Ft39.30808-6%2F719782319_1514877810435729_1699008957321126102_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh2.08_tt6%26_nc_ht%3Dscontent-phl2-1.cdninstagram.com%26_nc_cat%3D109%26_nc_oc%3DQ6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I%26_nc_ohc%3DC4wZHdBY3kEQ7kNvwH1uRyJ%26_nc_gid%3DGC_myqSuI-dhgx0HTyKI_Q%26edm%3DAPs17CUAAAAA%26ccb%3D7-5%26oh%3D00_Af8yc7e8OXwj839lunDQZEMFrL6iBM1qyPzNjh9nIn_VTg%26oe%3D6A32C2DD%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/719782319_1514877810435729_1699008957321126102_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-phl2-1.cdninstagram.com&amp;_nc_cat=109&amp;_nc_oc=Q6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I&amp;_nc_ohc=C4wZHdBY3kEQ7kNvwH1uRyJ&amp;_nc_gid=GC_myqSuI-dhgx0HTyKI_Q&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af8yc7e8OXwj839lunDQZEMFrL6iBM1qyPzNjh9nIn_VTg&amp;oe=6A32C2DD&amp;_nc_sid=10d13b" alt="Imagen 6 de Cars Cars" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://images.weserv.nl/?url=scontent-phl2-1.cdninstagram.com%2Fv%2Ft39.30808-6%2F719612840_1514877863769057_3549724523362127657_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh2.08_tt6%26_nc_ht%3Dscontent-phl2-1.cdninstagram.com%26_nc_cat%3D109%26_nc_oc%3DQ6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I%26_nc_ohc%3Ds7sEaSqY6O4Q7kNvwEZ7VKC%26_nc_gid%3DGC_myqSuI-dhgx0HTyKI_Q%26edm%3DAPs17CUAAAAA%26ccb%3D7-5%26oh%3D00_Af-NInt-eFXaU7Rj-S2d04NzdqNuqMiRIkw6HTaJJc-MVw%26oe%3D6A32D4AF%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/719612840_1514877863769057_3549724523362127657_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-phl2-1.cdninstagram.com&amp;_nc_cat=109&amp;_nc_oc=Q6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I&amp;_nc_ohc=s7sEaSqY6O4Q7kNvwEZ7VKC&amp;_nc_gid=GC_myqSuI-dhgx0HTyKI_Q&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af-NInt-eFXaU7Rj-S2d04NzdqNuqMiRIkw6HTaJJc-MVw&amp;oe=6A32D4AF&amp;_nc_sid=10d13b" alt="Imagen 7 de Cars Cars" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+  <div class="gallery-item image-box reveal">
+    <img src="https://images.weserv.nl/?url=scontent-phl2-1.cdninstagram.com%2Fv%2Ft39.30808-6%2F719852599_1514877743769069_6220699223086782102_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh2.08_tt6%26_nc_ht%3Dscontent-phl2-1.cdninstagram.com%26_nc_cat%3D109%26_nc_oc%3DQ6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I%26_nc_ohc%3DIDIjP1An938Q7kNvwFP4C8U%26_nc_gid%3DGC_myqSuI-dhgx0HTyKI_Q%26edm%3DAPs17CUAAAAA%26ccb%3D7-5%26oh%3D00_Af94HL5S-bn9ZfwLLSi6o5KH0LV8Z8cDaQ32ayvuuJlmPg%26oe%3D6A32D800%26_nc_sid%3D10d13b&amp;w=1600&amp;output=webp" data-original-src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/719852599_1514877743769069_6220699223086782102_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&amp;_nc_ht=scontent-phl2-1.cdninstagram.com&amp;_nc_cat=109&amp;_nc_oc=Q6cZ2gGFED3dzzfmyZq8Il5bTDWETzUomn-GGvzkY47uiwRpOycG-Ds0Y-y3wb014AzY15I&amp;_nc_ohc=IDIjP1An938Q7kNvwFP4C8U&amp;_nc_gid=GC_myqSuI-dhgx0HTyKI_Q&amp;edm=APs17CUAAAAA&amp;ccb=7-5&amp;oh=00_Af94HL5S-bn9ZfwLLSi6o5KH0LV8Z8cDaQ32ayvuuJlmPg&amp;oe=6A32D800&amp;_nc_sid=10d13b" alt="Imagen 8 de Cars Cars" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.classList.add('image-error')">
+  </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="container contact-grid">
+        <div class="contact-card reveal">
+          <h2>Contacto y ubicación</h2>
+          <p>Ubicación detectada: <strong>Cars&amp;Cars</strong></p>
+          <p>Desde esta sección el cliente puede visitar el Instagram, escribir por WhatsApp si está disponible y ver la ubicación en el mapa.</p>
+
+          <div class="social-row">
+            
+  
+    <a class="social-btn whatsapp-btn" href="https://wa.me/543814192177?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20consultar." target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg width="24" height="24" viewBox="0 0 32 32" fill="white">
+        <path d="M16.02 3C8.86 3 3.04 8.72 3.04 15.75c0 2.5.74 4.82 2.02 6.79L3 29l6.66-2.02A13.1 13.1 0 0 0 16.02 28C23.18 28 29 22.28 29 15.25S23.18 3 16.02 3Zm0 22.74c-2.05 0-3.95-.6-5.55-1.64l-.4-.26-3.96 1.2 1.25-3.82-.27-.42a10.35 10.35 0 0 1-1.74-5.05c0-5.77 4.78-10.47 10.67-10.47s10.67 4.7 10.67 10.47-4.78 9.99-10.67 9.99Z"/>
+      </svg>
+      WhatsApp
+    </a>
+  
+  
+    <a class="social-btn instagram-btn" href="https://www.instagram.com/carscars_ok" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="18" height="18" rx="5" stroke="white" stroke-width="2"/>
+        <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/>
+        <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+      </svg>
+      Instagram
+    </a>
+  
+
+          </div>
+        </div>
+
+        <div class="map-box reveal">
+          <iframe src="https://www.google.com/maps?q=Cars%26Cars&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de Cars Cars"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Cars Cars · Demo de landing page de presentación.
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
