@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Web para Cars Cars - Tu Próximo Nivel Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50; /* Azul oscuro, casi negro */
+            --secondary-color: #3498db; /* Azul vibrante */
+            --accent-color: #e74c3c; /* Rojo para acentos */
+            --text-light: #ecf0f1; /* Blanco grisáceo */
+            --text-dark: #34495e; /* Gris oscuro */
+            --bg-light: #f8f9fa; /* Fondo claro */
+            --bg-dark: #1a1a1a; /* Fondo oscuro principal */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background-color: var(--bg-dark);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        header h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        section h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.2em;
+            color: var(--secondary-color);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x1080/222222/ffffff?text=Fondo+de+Vehiculo') no-repeat center center/cover;
+            padding: 150px 20px;
+            color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #2980b9; /* Tono más oscuro de azul */
+            transform: translateY(-3px);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            background-color: var(--primary-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-item h3 {
+            color: var(--accent-color);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .feature-item p {
+            color: var(--text-light);
+            font-size: 1em;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .service-item {
+            background-color: var(--primary-color);
+            padding: 25px;
+            border-radius: 8px;
+            width: 280px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .service-item:hover {
+            background-color: #3f5d7a; /* Tono más claro de primary-color */
+        }
+
+        .service-item h3 {
+            color: var(--secondary-color);
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .service-item p {
+            color: var(--text-light);
+            font-size: 0.95em;
+        }
+
+        .why-web-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .why-web-item {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .why-web-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .why-web-item h3 {
+            color: var(--primary-color);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .why-web-item p {
+            font-size: 1em;
+        }
+
+        .cta-final {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 60px 20px;
+            border-top: 3px solid var(--accent-color);
+        }
+
+        .cta-final h2 {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .cta-final h2::after {
+            background-color: var(--text-light);
+        }
+
+        .cta-final p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h2 {
+                font-size: 1.8em;
+            }
+
+            .features-grid, .why-web-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item, .why-web-item {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9em;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Cars Cars: Tu Próximo Nivel Digital</h1>
+            <p>Una propuesta para llevar tu negocio de vehículos al mundo online.</p>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Cars Cars: Tu próximo vehículo te espera.</h1>
+            <p>Explorá la mayor selección de autos y motos con envíos a todo el país.</p>
+            <a href="#nuestros-servicios" class="btn">Descubrí lo que Cars Cars ofrece</a>
+        </div>
+    </section>
+
+    <section id="beneficios">
+        <div class="container">
+            <h2>¿Por qué elegir Cars Cars?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>Amplia Selección</h3>
+                    <p>Un catálogo variado de autos y motos para todos los gustos y necesidades, desde modelos urbanos hasta camionetas 4x4.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Envíos a Todo el País</h3>
+                    <p>Llevamos tu nuevo vehículo a cualquier rincón de Argentina, con la logística y seguridad que vos necesitás.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Asesoramiento Personalizado</h3>
+                    <p>Nuestro equipo está listo para brindarte atención exclusiva, resolver tus dudas y ayudarte a tomar la mejor decisión.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Calidad y Confianza</h3>
+                    <p>Trabajamos con vehículos de primera línea y garantizamos transparencia en cada operación, para tu total tranquilidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="nuestros-servicios">
+        <div class="container">
+            <h2>Nuestros Vehículos</h2>
+            <p>En Cars Cars, te conectamos con el rodado de tus sueños. Descubrí nuestra oferta:</p>
+            <ul class="service-list">
+                <li class="service-item">
+                    <h3>Autos 0km y Usados</h3>
+                    <p>Sedanes, SUVs, compactos y deportivos. Encontrá el auto perfecto para tu día a día o tus aventuras.</p>
+                </li>
+                <li class="service-item">
+                    <h3>Motos de Alta Gama</h3>
+                    <p>Desde motos urbanas hasta modelos de alta cilindrada. Viví la adrenalina sobre dos ruedas con nuestra selección.</p>
+                </li>
+                <li class="service-item">
+                    <h3>Camionetas 4x4</h3>
+                    <p>Potencia y versatilidad para el trabajo o el ocio. Las mejores marcas y modelos para enfrentar cualquier terreno.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="porque-web">
+        <div class="container">
+            <h2>¿Por qué Cars Cars necesita una web profesional?</h2>
+            <p>Instagram es genial, pero una web propia es tu concesionaria abierta 24/7. Te explicamos por qué es clave para el crecimiento de Cars Cars:</p>
+            <div class="why-web-grid">
+                <div class="why-web-item">
+                    <h3>Profesionalismo y Credibilidad</h3>
+                    <p>Una página web eleva tu imagen, proyectando seriedad y confianza, diferenciándote de la competencia y consolidando tu marca en el sector automotriz.</p>
+                </div>
+                <div class="why-web-item">
+                    <h3>Mayor Visibilidad y Alcance</h3>
+                    <p>Aparecé en Google cuando alguien busca un vehículo. Una web optimizada te conecta con miles de potenciales compradores que no están en Instagram.</p>
+                </div>
+                <div class="why-web-item">
+                    <h3>Catálogo Interactivo y Organizado</h3>
+                    <p>Mostrá cada vehículo con fotos de alta calidad, descripciones detalladas, precios y filtros de búsqueda que faciliten la experiencia del usuario.</p>
+                </div>
+                <div class="why-web-item">
+                    <h3>Generación de Leads Calificados</h3>
+                    <p>Implementá formularios de contacto, solicitudes de cotización o pruebas de manejo, capturando datos de clientes interesados de forma eficiente.</p>
+                </div>
+                <div class="why-web-item">
+                    <h3>Disponibilidad 24/7</h3>
+                    <p>Tu concesionaria online nunca cierra. Los clientes pueden explorar tu stock, informarse y contactarte en cualquier momento, desde cualquier dispositivo.</p>
+                </div>
+                <div class="why-web-item">
+                    <h3>Control Total de tu Marca</h3>
+                    <p>A diferencia de las redes sociales, tu web es tuya. Controlás el contenido, el diseño y la experiencia del usuario sin depender de algoritmos externos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-final">
+        <div class="container">
+            <h2>¿Listo para impulsar tu negocio al siguiente nivel?</h2>
+            <p>Una web a medida para Cars Cars no es un gasto, es la inversión que tu negocio necesita para crecer, vender más y consolidar su liderazgo.</p>
+            <a href="https://wa.me/54911xxxxxxxx?text=Hola!%20Vi%20tu%20propuesta%20para%20Cars%20Cars%20y%20me%20interesa%20hablar%20sobre%20una%20web." class="btn" target="_blank">¡Hablemos por WhatsApp!</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Tu Agencia Digital. Propuesta para Cars Cars.</p>
+        </div>
+    </footer>
+</body>
+</html>
