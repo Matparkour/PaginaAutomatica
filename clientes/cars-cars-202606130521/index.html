@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Cars - Tu Próximo Vehículo te Espera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0A0A0A;
+            --secondary-dark: #1A1A1A;
+            --text-light: #FFFFFF;
+            --accent-blue: #007BFF; /* Electric Blue */
+            --accent-gold: #FFD700; /* Gold */
+            --gray-light: #CCCCCC;
+            --gray-medium: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--secondary-dark);
+            padding: 15px 0;
+            border-bottom: 1px solid #2A2A2A;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            display: block;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            background-color: var(--primary-dark);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4; /* Darken image */
+            filter: brightness(0.7);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            color: var(--gray-light);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-blue);
+            color: var(--text-light);
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Featured Vehicles */
+        .vehicles-section {
+            padding: 80px 0;
+            background-color: var(--primary-dark);
+        }
+
+        .vehicles-section h2 {
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 60px;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .vehicle-card {
+            background-color: var(--secondary-dark);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+        }
+
+        .vehicle-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #2A2A2A;
+        }
+
+        .vehicle-info {
+            padding: 25px;
+        }
+
+        .vehicle-info h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .vehicle-info p {
+            font-family: 'Roboto', sans-serif;
+            color: var(--gray-light);
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .vehicle-info .price {
+            font-size: 1.4em;
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-top: 15px;
+            display: block;
+        }
+
+        .vehicle-info .btn {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 1em;
+        }
+
+        /* About & Contact */
+        .contact-section {
+            padding: 80px 0;
+            background-color: var(--secondary-dark);
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            flex: 1 1 300px;
+            max-width: 350px;
+            background-color: var(--primary-dark);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            text-align: left;
+        }
+
+        .contact-item h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .contact-item p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: var(--gray-light);
+        }
+
+        .contact-item a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--gray-light);
+        }
+
+        .map-container {
+            margin-top: 60px;
+            width: 100%;
+            height: 400px;
+            background-color: #2A2A2A;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-dark);
+            color: var(--gray-medium);
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #2A2A2A;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9em;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .social-links a {
+            color: var(--gray-medium);
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links li {
+                margin: 0 15px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .vehicles-section h2, .contact-section h2 {
+                font-size: 2em;
+            }
+
+            .vehicle-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-item {
+                max-width: 90%;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9em;
+            }
+
+            .vehicle-info h3 {
+                font-size: 1.5em;
+            }
+
+            .vehicle-info p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <img src="https://scontent-ord5-1.cdninstagram.com/v/t51.82787-19/519605705_18282956869252074_4183538261967100659_n.jpg?stp=dst-jpg_e0_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gFctTXQizYv29TsY1EQauYvo4lZ3KFs7WMOOJIaxPCyZnftixjUj75JZijDYW9GdWA&_nc_ohc=Y3RXgLs8zJMQ7kNvwHxr1bE&_nc_gid=PWo4a0_qZcWbdX11wCShEg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_Af88smhoPakj4rB0td6wzwMbqqJ6DDO7Fa4bIWRu_KdXWg&oe=6A32BC07&_nc_sid=8b3546" alt="Cars Cars Logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#vehiculos">Vehículos</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <img src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/710598461_1502388641684646_8015241078914829250_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-phl2-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gHBnLrDrjVGPssv5xKP1xm-T-04mAUxupHwSnigIIixE_BndX7j6cbeyMHrOM3Gt6w&_nc_ohc=En9Pdh1sAjYQ7kNvwEUy_zj&_nc_gid=ywXvYzGwA49xDIGAyGMkrw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af9KEYHRSjOMVCJ8_IyYlP8NfjDdtTKrmgWIP3dQzPtt6Q&oe=6A32B8D8&_nc_sid=10d13b" alt="Volkswagen Taos Highline" class="hero-bg">
+            <div class="hero-content">
+                <h1>Encontrá el auto de tus sueños en Cars Cars</h1>
+                <p>Tu destino premium para vehículos usados y 0 km en Yerba Buena, Tucumán. Calidad, confianza y el mejor servicio.</p>
+                <a href="#vehiculos" class="btn">Explorar Vehículos</a>
+            </div>
+        </section>
+
+        <section id="vehiculos" class="vehicles-section">
+            <div class="container">
+                <h2>Nuestros Vehículos Destacados</h2>
+                <div class="vehicle-grid">
+                    <div class="vehicle-card">
+                        <img src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/710598461_1502388641684646_8015241078914829250_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-phl2-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gHBnLrDrjVGPssv5xKP1xm-T-04mAUxupHwSnigIIixE_BndX7j6cbeyMHrOM3Gt6w&_nc_ohc=En9Pdh1sAjYQ7kNvwEUy_zj&_nc_gid=ywXvYzGwA49xDIGAyGMkrw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af9KEYHRSjOMVCJ8_IyYlP8NfjDdtTKrmgWIP3dQzPtt6Q&oe=6A32B8D8&_nc_sid=10d13b" alt="Volkswagen Taos Highline">
+                        <div class="vehicle-info">
+                            <h3>Volkswagen Taos Highline</h3>
+                            <p>Modelo: 2022</p>
+                            <p>Kilometraje: 49.600 km</p>
+                            <span class="price">Consultar Precio</span>
+                            <a href="https://wa.me/543814192177?text=Hola%20Cars%20Cars,%20estoy%20interesado%20en%20el%20Volkswagen%20Taos%20Highline.%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20informaci%C3%B3n?" target="_blank" class="btn">Más Información</a>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card">
+                        <img src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/709864519_1502388681684642_6939168723459476391_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-phl2-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gHBnLrDrjVGPssv5xKP1xm-T-04mAUxupHwSnigIIixE_BndX7j6cbeyMHrOM3Gt6w&_nc_ohc=RBrupW4c8G4Q7kNvwHKNiyV&_nc_gid=ywXvYzGwA49xDIGAyGMkrw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-UacDgfAsirImD1B46_1V4BhJlBfsPuGgpvj8pKp4c3A&oe=6A32BEE3&_nc_sid=10d13b" alt="Ford Ranger Raptor">
+                        <div class="vehicle-info">
+                            <h3>Ford Ranger Raptor</h3>
+                            <p>Modelo: 0 km</p>
+                            <p>Estado: Sin patentar</p>
+                            <span class="price">Consultar Precio</span>
+                            <a href="https://wa.me/543814192177?text=Hola%20Cars%20Cars,%20estoy%20interesado%20en%20la%20Ford%20Ranger%20Raptor%200%20km.%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20informaci%C3%B3n?" target="_blank" class="btn">Más Información</a>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card">
+                        <img src="https://scontent-ord5-1.cdninstagram.com/v/t39.30808-6/714542094_1509643747625802_1818751106370746478_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gHATQUNsj74tnRuieCLpd278i4XT__4Rvaryy08IkfvXtJpuG6PQY1e08UxGQv9qGI&_nc_ohc=E6rvUPwevisQ7kNvwHxJiKM&_nc_gid=ddFGcXt2pR6V4NWRYtcGHA&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af_afNfTchaJ3g_sqk5PkexFp17UYtKc7yK8_Pr-5BZ0nQ&oe=6A32CA26&_nc_sid=10d13b" alt="Toyota Corolla XEI Hybrid">
+                        <div class="vehicle-info">
+                            <h3>Toyota Corolla XEI Hybrid</h3>
+                            <p>Modelo: 2026 (¡Nuevo!)</p>
+                            <p>Kilometraje: 0 km</p>
+                            <span class="price">Consultar Precio</span>
+                            <a href="https://wa.me/543814192177?text=Hola%20Cars%20Cars,%20estoy%20interesado%20en%20el%20Toyota%20Corolla%20XEI%20Hybrid%200%20km.%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20informaci%C3%B3n?" target="_blank" class="btn">Más Información</a>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card">
+                        <img src="https://scontent-phl2-1.cdninstagram.com/v/t39.30808-6/710193146_1502388718351305_8102181668357247126_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-phl2-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gHBnLrDrjVGPssv5xKP1xm-T-04mAUxupHwSnigIIixE_BndX7j6cbeyMHrOM3Gt6w&_nc_ohc=irNo6b25vQUQ7kNvwF3C28i&_nc_gid=ywXvYzGwA49xDIGAyGMkrw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af9mY-UX6aNNXyY8QfmG4yBaei7tTIF1kDjHEqUzExWhRg&oe=6A32D587&_nc_sid=10d13b" alt="Volkswagen Nivus Comfortline AT">
+                        <div class="vehicle-info">
+                            <h3>Volkswagen Nivus Comfortline AT</h3>
+                            <p>Modelo: 2026 (¡Nuevo!)</p>
+                            <p>Kilometraje: 10.000 km</p>
+                            <span class="price">Consultar Precio</span>
+                            <a href="https://wa.me/543814192177?text=Hola%20Cars%20Cars,%20estoy%20interesado%20en%20el%20Volkswagen%20Nivus%20Comfortline%20AT.%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20informaci%C3%B3n?" target="_blank" class="btn">Más Información</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact-section">
+            <div class="container">
+                <h2>¿Listo para tu próximo auto? ¡Contáctanos!</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>Visítanos</h3>
+                        <p>📍 Av. Aconquija 1567</p>
+                        <p>Yerba Buena, Tucumán</p>
+                        <p>Argentina</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Llámanos o Envíanos WhatsApp</h3>
+                        <p>📲 <a href="tel:+543814192177">381 419 2177</a></p>
+                        <p>📲 <a href="tel:+543815081846">381 508 1846</a></p>
+                        <p>¡Respondemos tus consultas al instante!</p>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <!-- Google Maps Embed Code Placeholder -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.852924467389!2d-65.293672984956!3d-26.82092198315809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225d3010b91221%3A0x28c0c4c4478c9d06!2sAv.%20Aconquija%201567%2C%20Yerba%20Buena%2C%20Tucum%C3%A1n!5e0!3m2!1ses-419!2sar!4v1678890000000!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Cars Cars. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/carscars_ok" target="_blank" aria-label="Instagram de Cars Cars">
+                    <!-- Simple Instagram icon placeholder, ideally an SVG or font icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
