@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars & Cars - Tu Próximo Vehículo te Espera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d1117;
+            --secondary-color: #161b22;
+            --accent-color: #007bff; /* Un azul vibrante */
+            --text-color-light: #f0f6fc;
+            --text-color-dark: #c9d1d9;
+            --border-color: #30363d;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--primary-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x800/0d1117/c9d1d9?text=Vehiculo+de+Lujo') no-repeat center center/cover;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-color-light);
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to right, rgba(13,17,23,0.8), rgba(13,17,23,0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px var(--shadow-color);
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-color-light);
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section.alt {
+            background-color: var(--secondary-color);
+        }
+
+        .section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            color: var(--text-color-light);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background-color: var(--secondary-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        .card h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 1em;
+            color: var(--text-color-dark);
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+
+        .card ul li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-color-dark);
+        }
+
+        .card ul li::before {
+            content: '✓'; /* Icono de check */
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-item {
+            background-color: var(--primary-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .service-item h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .service-item p {
+            margin-bottom: 20px;
+            color: var(--text-color-dark);
+        }
+
+        .cta-section {
+            background-color: var(--accent-color);
+            color: var(--text-color-light);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+        }
+
+        .cta-section .btn {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+        }
+
+        .cta-section .btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-color-dark);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer .social-links a {
+            color: var(--text-color-dark);
+            font-size: 1.5em;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .section h3 {
+                font-size: 2em;
+            }
+
+            .card h4,
+            .service-item h4 {
+                font-size: 1.5em;
+            }
+
+            .cta-section h3 {
+                font-size: 2em;
+            }
+
+            .cta-section p {
+                font-size: 1em;
+            }
+
+            .grid-3, .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .hero h2 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9em;
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .section h3 {
+                font-size: 1.8em;
+            }
+
+            .card, .service-item {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Cars & Cars</h1>
+            <p>Yerba Buena, Tucumán | Envíos a todo el país</p>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Tu Próximo Vehículo te Espera, en Tucumán o Donde Estés.</h2>
+            <p>Automóviles y Motos de Alta Gama con Envío Seguro a Toda la Argentina.</p>
+            <a href="#servicios" class="btn">Explorá Nuestro Catálogo</a>
+        </div>
+    </section>
+
+    <section id="beneficios" class="section">
+        <div class="container">
+            <h3>¿Por Qué Elegir Cars & Cars?</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>Variedad y Calidad</h4>
+                    <p>Contamos con una amplia y selecta flota de automóviles y motocicletas, todos revisados y garantizados para asegurar tu tranquilidad.</p>
+                </div>
+                <div class="card">
+                    <h4>Envío Nacional</h4>
+                    <p>No importa dónde te encuentres en Argentina, llevamos tu nuevo vehículo directamente a tu puerta, de forma segura y eficiente.</p>
+                </div>
+                <div class="card">
+                    <h4>Asesoramiento Experto</h4>
+                    <p>Nuestro equipo está listo para brindarte atención personalizada y ayudarte a encontrar el vehículo ideal que se ajuste a tus necesidades y deseos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="section alt">
+        <div class="container">
+            <h3>Nuestros Vehículos y Servicios</h3>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h4>Automóviles</h4>
+                    <p>Desde deportivos hasta camionetas de lujo, nuestra selección de autos nuevos y usados te ofrece calidad y rendimiento.</p>
+                    <a href="https://wa.me/543814192177" target="_blank" class="btn">Ver Stock / Consultar</a>
+                </div>
+                <div class="service-item">
+                    <h4>Motocicletas</h4>
+                    <p>Experimenta la libertad sobre dos ruedas con nuestra exclusiva gama de motocicletas, para la ciudad o la aventura.</p>
+                    <a href="https://wa.me/543814192177" target="_blank" class="btn">Ver Stock / Consultar</a>
+                </div>
+                <div class="service-item">
+                    <h4>Venta de Tu Usado</h4>
+                    <p>¿Querés vender tu vehículo? Te ofrecemos las mejores condiciones para que tu usado encuentre un nuevo dueño de forma rápida y segura.</p>
+                    <a href="https://wa.me/543814192177" target="_blank" class="btn">Consignar Ahora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="porque-web" class="section">
+        <div class="container">
+            <h3>Potenciá Tu Negocio con una Presencia Digital Profesional</h3>
+            <p style="font-size: 1.2em; max-width: 700px; margin: 0 auto 50px;">En Cars & Cars ya tienen un gran alcance en Instagram, pero una web propia puede llevarlos al siguiente nivel, ofreciendo una experiencia completa y profesional a sus clientes.</p>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>Catálogo Centralizado 24/7</h4>
+                    <p>Organiza y muestra todo tu stock de vehículos con detalles, fotos y videos, accesible para tus clientes en cualquier momento y lugar.</p>
+                </div>
+                <div class="card">
+                    <h4>Profesionalismo y Confianza</h4>
+                    <p>Una web propia refuerza tu imagen de marca, genera mayor credibilidad y te diferencia de la competencia, atrayendo a clientes más calificados.</p>
+                </div>
+                <div class="card">
+                    <h4>Generación de Leads Calificados</h4>
+                    <p>Implementa formularios de contacto, solicitudes de cotización y herramientas de seguimiento para captar y gestionar prospectos de forma eficiente.</p>
+                </div>
+                <div class="card">
+                    <h4>Independencia de Plataformas</h4>
+                    <p>No dependas solo de redes sociales. Una web es tu activo digital principal, con control total sobre el contenido y la experiencia del usuario.</p>
+                </div>
+                <div class="card">
+                    <h4>Experiencia de Usuario Superior</h4>
+                    <p>Permite a tus clientes filtrar, comparar y explorar vehículos con facilidad, ofreciéndoles toda la información que necesitan para tomar una decisión.</p>
+                </div>
+                <div class="card">
+                    <h4>Alcance Ampliado</h4>
+                    <p>Atrae tráfico orgánico a través de Google y otras fuentes, llegando a clientes que no usan Instagram y expandiendo tu mercado potencial.</p>
+                </div>
+            </div>
+            <a href="mailto:tucorreoaqui@ejemplo.com?subject=Propuesta%20Web%20para%20Cars%20%26%20Cars" class="btn" style="margin-top: 50px;">¡Hablemos de tu Nueva Web!</a>
+        </div>
+    </section>
+
+    <section id="contacto-wa" class="cta-section">
+        <div class="container">
+            <h3>¿Interesado en un Vehículo?</h3>
+            <p>¡Contactá a Blas directamente por WhatsApp para recibir asesoramiento personalizado y conocer las últimas novedades!</p>
+            <a href="https://wa.me/543814192177" target="_blank" class="btn">Hablar con Blas por WhatsApp</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <span class="logo">Cars & Cars</span>
+            <p>📍 Av Aconquija 1567, Yerba Buena, Tucumán, Argentina</p>
+            <p>📞 +54 381 419-2177</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/carscars_ok" target="_blank">Instagram</a>
+            </div>
+            <p>&copy; 2024 Cars & Cars. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
