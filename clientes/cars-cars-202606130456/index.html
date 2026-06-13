@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Cars - Tu Próximo Vehículo te Espera</title>
+    <style>
+        /* Reset y Estilos Generales */
+        :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #282828;
+            --text-color: #f0f0f0;
+            --accent-color: #007bff;
+            --light-grey: #cccccc;
+            --dark-grey-text: #555;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        /* Botones */
+        .btn-primary, .btn-secondary {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-bg);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        /* Header y Navegación */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        header .brand-name {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 30px;
+        }
+
+        header nav ul li a {
+            color: var(--light-grey);
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        #hero {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://scontent-lga3-3.cdninstagram.com/v/t39.30808-6/719427603_1514824427107734_336013267790781051_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr26797zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=_RYtZxY5L5QQ7kNvwEjixXx&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-dLbv5-Jm2OWgYdQ1SRJgRGIHjeVRylZtO2f6IhekHog&oe=6A32C447&_nc_sid=10d13b');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-color);
+            padding: 150px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        #hero p {
+            font-size: 1.5em;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        /* About Section */
+        #about {
+            background-color: var(--secondary-bg);
+        }
+
+        #about p {
+            max-width: 800px;
+            margin: 0 auto 15px auto;
+            color: var(--light-grey);
+        }
+
+        /* Vehículos Destacados Section */
+        #vehiculos .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .car-card {
+            background-color: var(--secondary-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            text-align: left;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .car-card .info {
+            padding: 20px;
+        }
+
+        .car-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            color: var(--accent-color);
+        }
+
+        .car-card p {
+            font-size: 1em;
+            color: var(--light-grey);
+            margin-bottom: 10px;
+        }
+
+        .car-card .btn-secondary {
+            margin-top: 10px;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* Beneficios Section */
+        #beneficios {
+            background-color: var(--primary-bg);
+        }
+
+        #beneficios .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+
+        .benefit-item {
+            background-color: var(--secondary-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            background-color: #3a3a3a;
+        }
+
+        .benefit-item i {
+            font-size: 3em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .benefit-item h3 {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item p {
+            color: var(--light-grey);
+            font-size: 1em;
+        }
+
+        /* Galería Section */
+        #galeria {
+            background-color: var(--secondary-bg);
+        }
+
+        #galeria .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        #galeria .gallery-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        #galeria .gallery-grid img:hover {
+            transform: scale(1.03);
+        }
+
+        /* Contacto Section */
+        #contacto {
+            background-color: var(--primary-bg);
+        }
+
+        #contacto .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1em;
+            color: var(--light-grey);
+        }
+
+        #contacto .contact-info p strong {
+            color: var(--text-color);
+        }
+
+        #contacto .contact-info a {
+            font-weight: bold;
+        }
+
+        .map-placeholder {
+            background-color: #333;
+            height: 250px;
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--light-grey);
+            font-size: 1.2em;
+            border: 1px solid #444;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--dark-grey-text);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9em;
+            border-top: 1px solid #333;
+        }
+
+        footer a {
+            color: var(--dark-grey-text);
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            text-decoration: none;
+            color: #FFF;
+        }
+
+        .whatsapp-float i {
+            font-size: 1em; /* Adjust icon size if using font awesome */
+            /* For simplicity, I'll use a text-based icon or emoji if no external font is allowed */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            h2 {
+                font-size: 2em;
+            }
+            #hero {
+                padding: 100px 20px;
+                min-height: 60vh;
+            }
+            #hero p {
+                font-size: 1.2em;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            header nav ul {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 15px;
+            }
+            header nav ul li {
+                margin: 10px 0;
+                text-align: left;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+            .car-card .info {
+                padding: 15px;
+            }
+            .car-card h3 {
+                font-size: 1.3em;
+            }
+            .benefit-item {
+                padding: 20px;
+            }
+            .benefit-item h3 {
+                font-size: 1.4em;
+            }
+            section {
+                padding: 60px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            header .brand-name {
+                font-size: 1.5em;
+            }
+            header .logo {
+                height: 35px;
+            }
+            .btn-primary, .btn-secondary {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+            #hero p {
+                font-size: 1em;
+            }
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://scontent-atl3-1.cdninstagram.com/v/t51.82787-19/519605705_18282956869252074_4183538261967100659_n.jpg?stp=dst-jpg_e0_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-atl3-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gHXLtxfdN9YzOvK7wWVZULNVE74MA2wQnaLV3KFbo9bZ_MaQzzxdflXGWAFcFxWht0&_nc_ohc=Y3RXgLs8zJMQ7kNvwGYCmbM&_nc_gid=32pWmDWBc-S037lJRDJ0Q&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_Af_bwB_eaxJfIQxzjo3uMF5InoQcuPXJd4eCyW03lHXZg&oe=6A32BC07&_nc_sid=8b3546" alt="Cars Cars Logo" class="logo">
+            <span class="brand-name">Cars Cars</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#about">Nosotros</a></li>
+                <li><a href="#vehiculos">Vehículos</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Tu Próximo Vehículo te Espera</h1>
+                <p>Concesionaria líder en 0km y usados premium en Yerba Buena, Tucumán.</p>
+                <a href="#vehiculos" class="btn-primary">Explorar Vehículos</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>Cars Cars: Tu Concesionaria de Confianza</h2>
+                <p>
+                    En <strong>Cars Cars</strong>, somos más que una concesionaria; somos tu socio en la búsqueda del vehículo perfecto. Con años de experiencia en Yerba Buena, Tucumán, ofrecemos una selección cuidadosamente curada de autos 0 km y usados de alta gama. Nuestra pasión es conectar a cada cliente con el auto de sus sueños, garantizando transparencia, calidad y el mejor asesoramiento.
+                </p>
+                <p>
+                    Nos destacamos por nuestra atención personalizada y un stock que se adapta a tus necesidades y gustos. Ya sea que busques la potencia de una camioneta, la elegancia de un sedán o la versatilidad de un SUV, en Cars Cars encontrarás la mejor opción.  ¡Ven y descubre la diferencia!
+                </p>
+            </div>
+        </section>
+
+        <section id="vehiculos">
+            <div class="container">
+                <h2>Vehículos Destacados</h2>
+                <div class="grid-container">
+                    <div class="car-card">
+                        <img src="https://scontent-lga3-3.cdninstagram.com/v/t39.30808-6/719427603_1514824427107734_336013267790781051_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr26797zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=_RYtZxY5L5QQ7kNvwEjixXx&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-dLbv5-Jm2OWgYdQ1SRJgRGIHjeVRylZtO2f6IhekHog&oe=6A32C447&_nc_sid=10d13b" alt="Ford Ranger Raptor">
+                        <div class="info">
+                            <h3>Ford Ranger Raptor</h3>
+                            <p>0 km · Sin patentar</p>
+                            <a href="https://wa.me/5493814192177?text=Hola%2C%20me%20interesa%20la%20Ford%20Ranger%20Raptor%200km." class="btn-secondary">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="car-card">
+                        <img src="https://scontent-lga3-1.cdninstagram.com/v/t39.30808-6/722098328_1514824517107725_1357201241191258302_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr2677zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=Ri04XFYajpwQ7kNvwGHwGdF&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-T9Kd28D48TABQyr91tjuW4R1hgcUEipQqD_6UcnOD-Q&oe=6A32AD1F&_nc_sid=10d13b" alt="Toyota Corolla XEI Hybrid">
+                        <div class="info">
+                            <h3>Toyota Corolla XEI Hybrid</h3>
+                            <p>Modelo 2026 · 0 km</p>
+                            <a href="https://wa.me/5493814192177?text=Hola%2C%20me%20interesa%20el%20Toyota%20Corolla%20XEI%20Hybrid%200km." class="btn-secondary">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="car-card">
+                        <img src="https://scontent-lga3-1.cdninstagram.com/v/t39.30808-6/720168138_1514824503774393_3465423460293179928_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr2677zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=Djub1bURZnEQ7kNvwEG_tGS&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af9o0LMZlVQd0dNKaNNj7LwPIz_XK4ahaaPdWLi6m0-n1w&oe=6A32AB2E&_nc_sid=10d13b" alt="Volkswagen Nivus Comfortline AT">
+                        <div class="info">
+                            <h3>Volkswagen Nivus Comfortline AT</h3>
+                            <p>Modelo 2026 · 10.000 km</p>
+                            <a href="https://wa.me/5493814192177?text=Hola%2C%20me%20interesa%20el%20VW%20Nivus%20Comfortline%20AT." class="btn-secondary">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="car-card">
+                        <img src="https://scontent-lga3-2.cdninstagram.com/v/t39.30808-6/720051401_1514824447107732_4877404325566359320_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-2.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr2677zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=s71R4sQvGwsQ7kNvwEjOc--&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af8668yhgr5P04FVS-DeSkDyZMgom4LnEEJBrzmrNclTGA&oe=6A32AA5D&_nc_sid=10d13b" alt="Volkswagen Taos Highline 250 TSI AT">
+                        <div class="info">
+                            <h3>Volkswagen Taos Highline 250 TSI AT</h3>
+                            <p>Modelo 2022 · 49.600 km</p>
+                            <a href="https://wa.me/5493814192177?text=Hola%2C%20me%20interesa%20la%20VW%20Taos%20Highline%20250%20TSI%20AT." class="btn-secondary">Consultar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="beneficios">
+            <div class="container">
+                <h2>¿Por Qué Elegir Cars Cars?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <!-- Icon placeholder, ideally from Font Awesome if allowed -->
+                        <p style="font-size: 3em;">&#128663;</p> 
+                        <h3>Amplia Variedad</h3>
+                        <p>Un extenso catálogo de vehículos 0km y usados de las mejores marcas, para que encuentres el ideal.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <p style="font-size: 3em;">&#128172;</p>
+                        <h3>Asesoramiento Personalizado</h3>
+                        <p>Nuestro equipo experto te guiará en cada paso, brindándote la información que necesitas.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <p style="font-size: 3em;">&#128176;</p>
+                        <h3>Financiación Flexible</h3>
+                        <p>Opciones de financiación a medida para que adquirir tu vehículo sea más fácil que nunca.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <p style="font-size: 3em;">&#128077;</p>
+                        <h3>Garantía de Calidad</h3>
+                        <p>Todos nuestros vehículos usados son revisados exhaustivamente para asegurar tu tranquilidad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria">
+            <div class="container">
+                <h2>Nuestra Flota en Imágenes</h2>
+                <div class="gallery-grid">
+                    <img src="https://scontent-lga3-3.cdninstagram.com/v/t39.30808-6/719427603_1514824427107734_336013267790781051_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr26797zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=_RYtZxY5L5QQ7kNvwEjixXx&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-dLbv5-Jm2OWgYdQ1SRJgRGIHjeVRylZtO2f6IhekHog&oe=6A32C447&_nc_sid=10d13b" alt="Coche en venta 1">
+                    <img src="https://scontent-lga3-1.cdninstagram.com/v/t39.30808-6/722098328_1514824517107725_1357201241191258302_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr2677zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=Ri04XFYajpwQ7kNvwGHwGdF&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-T9Kd28D48TABQyr91tjuW4R1hgcUEipQqD_6UcnOD-Q&oe=6A32AD1F&_nc_sid=10d13b" alt="Coche en venta 2">
+                    <img src="https://scontent-lga3-1.cdninstagram.com/v/t39.30808-6/720168138_1514824503774393_3465423460293179928_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr2677zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=Djub1bURZnEQ7kNvwEG_tGS&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af9o0LMZlVQd0dNKaNNj7LwPIz_XK4ahaaPdWLi6m0-n1w&oe=6A32AB2E&_nc_sid=10d13b" alt="Coche en venta 3">
+                    <img src="https://scontent-lga3-3.cdninstagram.com/v/t39.30808-6/720011093_1514824387107738_7260157765286254092_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr2677zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=VLheBm1hn34Q7kNvwHaF0Hk&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-Iq4Tvod7rOKq9L04jl8ofIeGvv9cBgCSdI8Yowvla7Q&oe=6A32CB48&_nc_sid=10d13b" alt="Coche en venta 4">
+                    <img src="https://scontent-lga3-3.cdninstagram.com/v/t39.30808-6/720417703_1514824467107730_3904897113425837994_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr2677zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=ELjyNa_N1h4Q7kNvwEQX_c_&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-oeArUVNx7WnvSuKfvXZo5Tqzj3iVujG_uGxPc25ROqQ&oe=6A32AFAA&_nc_sid=10d13b" alt="Coche en venta 5">
+                    <img src="https://scontent-lga3-2.cdninstagram.com/v/t39.30808-6/722911194_1514824500441060_5873791911379416433_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-2.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr2677zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=cXATunYHeiQQ7kNvwH9uRwK&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-8o27yroSeUXCG0GPYjX5xkdy2fY-q_soB7Sxhf0rq1A&oe=6A32B963&_nc_sid=10d13b" alt="Coche en venta 6">
+                    <img src="https://scontent-lga3-2.cdninstagram.com/v/t39.30808-6/720051401_1514824447107732_4877404325566359320_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-lga3-2.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2gH9c1gX8TDvBQ6SAExWCms65aEVKFo-nF3qzVyYr2677zr0IVW4lYOoyfKtbUJlpk&_nc_ohc=s71R4sQvGwsQ7kNvwEjOc--&_nc_gid=y9DXb36B44OnkMTnCJSQEw&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af8668yhgr5P04FVS-DeSkDyZMgom4LnEEJBrzmrNclTGA&oe=6A32AA5D&_nc_sid=10d13b" alt="Coche en venta 7">
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <div class="container">
+                <h2>Contáctanos</h2>
+                <p class="contact-info">
+                    Estamos listos para ayudarte a encontrar el auto de tus sueños. No dudes en comunicarte con nosotros.
+                </p>
+                <div class="contact-info">
+                    <p><strong>Dirección:</strong> Av. Aconquija 1567 – Yerba Buena, Tucumán</p>
+                    <p><strong>Teléfonos:</strong> 381 419 2177 / 381 508 1846</p>
+                    <a href="https://wa.me/5493814192177?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20Cars%20Cars." class="btn-primary">Enviar WhatsApp</a>
+                    <div class="map-placeholder">
+                        <span>Ubicación en Google Maps</span>
+                        <p><a href="https://www.google.com/maps/search/Av.+Aconquija+1567+%E2%80%93+Yerba+Buena,+Tucum%C3%A1n" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Ver en el mapa</a></p>
+                    </div>
+                    <p>Síguenos en <a href="https://www.instagram.com/carscars_ok" target="_blank">Instagram</a> para novedades y ofertas.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Cars Cars. Todos los derechos reservados.</p>
+            <p>
+                <a href="https://www.instagram.com/carscars_ok" target="_blank">Instagram</a>
+            </p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5493814192177?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20Cars%20Cars." class="whatsapp-float" target="_blank">
+        &#x1F4AC;
+    </a>
+</body>
+</html>
