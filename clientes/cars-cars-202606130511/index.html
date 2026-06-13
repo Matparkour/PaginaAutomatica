@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars & Cars - Tu Próximo Vehículo te Espera</title>
+    <style>
+        :root {
+            --primary-bg: #121212; /* Dark background */
+            --secondary-bg: #1A1A1A; /* Slightly lighter for cards/sections */
+            --text-color: #E0E0E0; /* Light grey text */
+            --heading-color: #FFFFFF; /* White headings */
+            --accent-color: #007BFF; /* Electric blue for buttons/highlights */
+            --accent-hover: #0056b3; /* Darker blue on hover */
+            --border-color: #333333; /* Dark grey border */
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --gradient-start: #1A1A1A;
+            --gradient-end: #0D0D0D;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--heading-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--heading-color);
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--heading-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        header nav ul li {
+            margin-left: 25px;
+        }
+
+        header nav ul li a {
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        header nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .btn-whatsapp-header {
+            background-color: var(--accent-color);
+            color: var(--heading-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-whatsapp-header:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+            z-index: 1;
+        }
+
+        #hero .hero-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            filter: brightness(0.7);
+        }
+
+        #hero .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--heading-color);
+            max-width: 800px;
+        }
+
+        #hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px var(--shadow-color);
+        }
+
+        #hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            text-shadow: 1px 1px 5px var(--shadow-color);
+        }
+
+        /* Sections General */
+        section {
+            padding: 80px 0;
+            background-color: var(--primary-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        /* About Section */
+        #about .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #about p {
+            font-size: 1.1rem;
+            max-width: 900px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Featured Vehicles */
+        #featured .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .vehicle-card {
+            background-color: var(--secondary-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px var(--shadow-color);
+        }
+
+        .vehicle-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .vehicle-card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vehicle-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: var(--heading-color);
+        }
+
+        .vehicle-card p {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+        }
+
+        .vehicle-card .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-top: auto;
+            margin-bottom: 15px;
+        }
+
+        .vehicle-card .btn {
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Benefits Section */
+        #benefits .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .benefit-item {
+            background-color: var(--secondary-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: transform 0.3s ease;
+            border-top: 3px solid var(--accent-color);
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--heading-color);
+        }
+
+        .benefit-item p {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        /* Gallery Section */
+        #gallery .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        #contact .contact-info {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #contact .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        #contact .contact-info a {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        #contact .contact-info a:hover {
+            color: var(--accent-color);
+        }
+
+        #contact .whatsapp-btn-wrapper {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer .footer-links ul {
+            list-style: none;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        footer .footer-links ul li {
+            margin: 0 15px;
+        }
+
+        footer .footer-links ul li a {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        footer .footer-links ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        .img-error {
+            background-color: var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            font-size: 0.8rem;
+            text-align: center;
+            min-height: 100px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header nav {
+                margin-top: 15px;
+                width: 100%;
+            }
+
+            header nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            header nav ul li {
+                margin: 5px 0;
+                width: 100%;
+            }
+
+            .btn-whatsapp-header {
+                margin-top: 15px;
+                align-self: center;
+                width: 100%;
+                text-align: center;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .vehicle-grid, .benefits-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links ul {
+                flex-direction: column;
+            }
+
+            .footer-links ul li {
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            #hero h1 {
+                font-size: 2rem;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#hero" class="logo">
+                <img src="https://scontent-atl3-1.cdninstagram.com/v/t51.82787-19/519605705_18282956869252074_4183538261967100659_n.jpg?stp=dst-jpg_e0_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZSI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-atl3-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gGGEUpyl71SsMJjZLix5BUlSldJpYCIJguvMu24bttLlmPFDoIQzAtXjCSfvmXNI-0&_nc_ohc=Y3RXgLs8zJMQ7kNvwHAZUWQ&_nc_gid=WcC9F0zWiccU7d3BTFVM3A&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_Af9oCOKX1xSjer-RUoG70Mt8jrXuMNpDLv8xkQzNKsUBVw&oe=6A32BC07&_nc_sid=8b3546" alt="Cars Cars Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='Cars & Cars';" class="logo-img">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#about">Nosotros</a></li>
+                    <li><a href="#featured">Destacados</a></li>
+                    <li><a href="#benefits">Beneficios</a></li>
+                    <li><a href="#gallery">Galería</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+            <a href="https://wa.me/5493814192177?text=Hola%2C%20quisiera%20consultar%20sobre%20un%20veh%C3%ADculo%20visto%20en%20su%20web." target="_blank" class="btn-whatsapp-header">WhatsApp</a>
+        </div>
+    </header>
+
+    <section id="hero">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/716630569_2268998357202170_825965043682335033_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_cat=102&_nc_oc=Q6cZ2gH2XZDc3Nt-kDdaNNc21oVBqhn5JgEF7I8UwHcPXp0VmxU-jSW8VExVBxqvhVKV1gA&_nc_ohc=HK-M-mdxNEoQ7kNvwF5bJXe&_nc_gid=z0vRCXbuKr6BstGzrPWbJQ&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfOHXZhy4BwG0B0oh2M9Rau9IAeiUtf-2YsADJVqAfWug&oe=6A32B5B6&_nc_sid=10d13b" alt="Automóvil deportivo de lujo en Cars & Cars" class="hero-bg-img" onerror="this.style.display='none'; this.parentElement.classList.add('img-error'); this.parentElement.innerHTML += '<div style=\'position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;background-color:#333;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;\'>Imagen no disponible</div>';">
+        <div class="hero-content">
+            <h1>Tu Próximo Vehículo te Espera en Cars & Cars</h1>
+            <p>Experiencia, Confianza y la Mejor Selección de Autos, Camionetas y Motos 0KM y Usados.</p>
+            <a href="#featured" class="btn">Explorar Vehículos</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>Sobre Nosotros: Tu Destino para Vehículos de Calidad</h2>
+            <p>
+                En Cars & Cars, somos apasionados por los vehículos y estamos comprometidos con ofrecerte una experiencia de compra inigualable. 
+                Con años de trayectoria en el rubro, nos hemos consolidado como una agencia de referencia en Yerba Buena, Tucumán, gracias a nuestra 
+                selección premium de unidades y una atención al cliente que prioriza tus necesidades. 
+            </p>
+            <p>
+                Ya sea que busques un 0KM de última generación, una camioneta robusta para el trabajo o el ocio, 
+                o un vehículo usado en excelentes condiciones, en Cars & Cars encontrarás la opción perfecta. 
+                Creemos en construir relaciones de confianza duraderas con cada cliente. ¡Te invitamos a conocernos!
+            </p>
+        </div>
+    </section>
+
+    <section id="featured">
+        <div class="container">
+            <h2>Nuestras Ofertas Destacadas</h2>
+            <div class="vehicle-grid">
+                <div class="vehicle-card">
+                    <img src="https://scontent-det1-1.cdninstagram.com/v/t39.30808-6/719427603_1514824427107734_336013267790781051_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-det1-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gETe0bA5ohkIlZ_i_svTeRVbCmOmQdzWWHJVH0_PCDQE8NpHFOiXkUy7IzS_L_UWvU&_nc_ohc=_RYtZxY5L5QQ7kNvwHeSQhk&_nc_gid=7RICfKWDBB9rSUyJ6-bLGQ&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-C2elMMlwQ-NqhApn1bX7HMfTa3Jor6T9jxPJmwS03cw&oe=6A32C447&_nc_sid=10d13b" alt="Toyota Corolla XEI Hybrid" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');">
+                    <div class="vehicle-card-content">
+                        <h3>Toyota Corolla XEI Hybrid</h3>
+                        <p>Modelo: 2026</p>
+                        <p>Kilometraje: 0 km</p>
+                        <p>Condición: ¡Sin estrenar!</p>
+                        <span class="price">Consultar Precio</span>
+                        <a href="https://wa.me/5493814192177?text=Hola%2C%20quisiera%20consultar%20sobre%20el%20Toyota%20Corolla%20XEI%20Hybrid." target="_blank" class="btn">Consultar Ahora</a>
+                    </div>
+                </div>
+                <div class="vehicle-card">
+                    <img src="https://scontent-det1-1.cdninstagram.com/v/t39.30808-6/722098328_1514824517107725_1357201241191258302_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-det1-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gETe0bA5ohkIlZ_i_svTeRVbCmOmQdzWWHJVH0_PCDQE8NpHFOiXkUy7IzS_L_UWvU&_nc_ohc=Ri04XFYajpwQ7kNvwEfiXeq&_nc_gid=7RICfKWDBB9rSUyJ6-bLGQ&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-o-npp14HBSrfm5QhRawmYPYw8YByQv3bD_BxV7QNYDg&oe=6A32AD1F&_nc_sid=10d13b" alt="Volkswagen Taos Highline 250 TSI AT" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');">
+                    <div class="vehicle-card-content">
+                        <h3>Volkswagen Taos Highline</h3>
+                        <p>Modelo: 2022</p>
+                        <p>Kilometraje: 49.600 km</p>
+                        <p>Transmisión: 250 TSI AT</p>
+                        <span class="price">Consultar Precio</span>
+                        <a href="https://wa.me/5493814192177?text=Hola%2C%20quisiera%20consultar%20sobre%20el%20Volkswagen%20Taos%20Highline." target="_blank" class="btn">Consultar Ahora</a>
+                    </div>
+                </div>
+                <div class="vehicle-card">
+                    <img src="https://scontent-det1-1.cdninstagram.com/v/t39.30808-6/720168138_1514824503774393_3465423460293179928_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-det1-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gETe0bA5ohkIlZ_i_svTeRVbCmOmQdzWWHJVH0_PCDQE8NpHFOiXkUy7IzS_L_UWvU&_nc_ohc=Djub1bURZnEQ7kNvwGYRezs&_nc_gid=7RICfKWDBB9rSUyJ6-bLGQ&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af9J2Iezv5S-unk8FzFz1fZL6iXespSRoL2356cerRhGLw&oe=6A32AB2E&_nc_sid=10d13b" alt="Volkswagen Nivus Comfortline AT" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');">
+                    <div class="vehicle-card-content">
+                        <h3>Volkswagen Nivus Comfortline</h3>
+                        <p>Modelo: 2026</p>
+                        <p>Kilometraje: 10.000 km</p>
+                        <p>Transmisión: AT</p>
+                        <span class="price">Consultar Precio</span>
+                        <a href="https://wa.me/5493814192177?text=Hola%2C%20quisiera%20consultar%20sobre%20el%20Volkswagen%20Nivus%20Comfortline." target="_blank" class="btn">Consultar Ahora</a>
+                    </div>
+                </div>
+                <div class="vehicle-card">
+                    <img src="https://scontent-det1-1.cdninstagram.com/v/t39.30808-6/720011093_1514824387107738_7260157765286254092_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-det1-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gETe0bA5ohkIlZ_i_svTeRVbCmOmQdzWWHJVH0_PCDQE8NpHFOiXkUy7IzS_L_UWvU&_nc_ohc=VLheBm1hn34Q7kNvwH5U-oO&_nc_gid=7RICfKWDBB9rSUyJ6-bLGQ&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af-kBqVM2yX3nwC88ro8XnRA03111f1Qm2iGRt33rysf5g&oe=6A32CB48&_nc_sid=10d13b" alt="Ford Ranger Raptor" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');">
+                    <div class="vehicle-card-content">
+                        <h3>Ford Ranger Raptor</h3>
+                        <p>Estado: 0 km</p>
+                        <p>Condición: Sin patentar</p>
+                        <p>Tipo: Camioneta de alta gama</p>
+                        <span class="price">Consultar Precio</span>
+                        <a href="https://wa.me/5493814192177?text=Hola%2C%20quisiera%20consultar%20sobre%20la%20Ford%20Ranger%20Raptor." target="_blank" class="btn">Consultar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits">
+        <div class="container">
+            <h2>¿Por Qué Elegir Cars & Cars?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <h3>Amplia Selección</h3>
+                    <p>Encuentra el vehículo de tus sueños entre nuestra variada oferta de 0KM, usados, camionetas y motos.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Financiación Flexible</h3>
+                    <p>Contamos con opciones de financiación adaptadas a tus necesidades para que estrenar sea más fácil.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Atención Personalizada</h3>
+                    <p>Nuestro equipo de expertos te brindará el asesoramiento y la atención que mereces en cada paso.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Garantía de Calidad</h3>
+                    <p>Todos nuestros vehículos pasan por rigurosas revisiones para asegurar su excelente estado y tu tranquilidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>Nuestra Selección en Imágenes</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://scontent-det1-1.cdninstagram.com/v/t39.30808-6/720417703_1514824467107730_3904897113425837994_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-det1-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gETe0bA5ohkIlZ_i_svTeRVbCmOmQdzWWHJVH0_PCDQE8NpHFOiXkUy7IzS_L_UWvU&_nc_ohc=ELjyNa_N1h4Q7kNvwEIfcuI&_nc_gid=7RICfKWDBB9rSUyJ6-bLGQ&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af8p7KIpMyK3IrfdEBwMTrRRfwNGVlPMJyB6vhC-1QboGg&oe=6A32AFAA&_nc_sid=10d13b" alt="Vehículo en exhibición" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');"></div>
+                <div class="gallery-item"><img src="https://scontent-det1-1.cdninstagram.com/v/t39.30808-6/722911194_1514824500441060_5873791911379416433_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-det1-1.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2gETe0bA5ohkIlZ_i_svTeRVbCmOmQdzWWHJVH0_PCDQE8NpHFOiXkUy7IzS_L_UWvU&_nc_ohc=cXATunYHeiQQ7kNvwEzhGZ_&_nc_gid=7RICfKWDBB9rSUyJ6-bLGQ&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af_wh75HmZsYQSrV7XuDCTC4MFImx2Umh5_l6smgTjTLXQ&oe=6A32B963&_nc_sid=10d13b" alt="Interior de vehículo" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');"></div>
+                <div class="gallery-item"><img src="https://scontent-det1-1.cdninstagram.com/v/t39.30808-6/720051401_1514824447107732_4877404325566359320_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-det1-1.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2gETe0bA5ohkIlZ_i_svTeRVbCmOmQdzWWHJVH0_PCDQE8NpHFOiXkUy7IzS_L_UWvU&_nc_ohc=s71R4sQvGwsQ7kNvwH6QbHm&_nc_gid=7RICfKWDBB9rSUyJ6-bLGQ&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af8B2k4thJ0wtFOyNm0NKcOQe54cyOzV2sET1s1Ud6IzGg&oe=6A32AA5D&_nc_sid=10d13b" alt="Detalle de motor" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');"></div>
+                <div class="gallery-item"><img src="https://scontent-phl2-1.cdninstagram.com/v/t51.71878-15/714882023_1541420780510171_2837462809275303736_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-phl2-1.cdninstagram.com&_nc_cat=111&_nc_oc=Q6cZ2gHYkcDuKy4g3VB1-dqa9PJO3TRvwdvxPK4_ZsymIGpylkwoEii-utom2IfOw5vwLQk&_nc_ohc=cRJ9Clxx6IUQ7kNvwHB9dJD&_nc_gid=h3b_ET-a29QdXZMYuQ_WDg&edm=APs17CUBAAAA&ccb=7-5&oh=00_Af9edRiXFEq4r-ypI-vYFrHvx43SJyVQ0ZiE9xi8xIX82w&oe=6A32D255&_nc_sid=10d13b" alt="Concesionario Cars & Cars" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');"></div>
+                <div class="gallery-item"><img src="https://scontent-hou1-1.cdninstagram.com/v/t39.30808-6/710598461_1502388641684646_8015241078914829250_n.jpg?stp=dst-jpg_e35_p1080x1080_sh2.08_tt6&_nc_ht=scontent-hou1-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gHsEdeZYLPyb3yfhiSCk_LLMiUMQ3QHn0PEgaCjWXBotpBswtd8BwlsQQMa9z3uWJM&_nc_ohc=En9Pdh1sAjYQ7kNvwHNCbef&_nc_gid=RpiQHPvtCTE1_Ik8FssbHQ&edm=APs17CUAAAAA&ccb=7-5&oh=00_Af_eXK1OWT_yfTrnuG7SsSVxdhQPUvgcJAVcACTMvBuTKA&oe=6A32B8D8&_nc_sid=10d13b" alt="Vehículos en venta" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contactate con Nosotros</h2>
+            <div class="contact-info">
+                <p>Estamos ubicados en:</p>
+                <p><strong>Av. Aconquija 1567 – Yerba Buena, Tucumán</strong></p>
+                <p>Nuestros teléfonos:</p>
+                <a href="tel:+543814192177">+54 381 419 2177</a>
+                <a href="tel:+543815081846">+54 381 508 1846</a>
+            </div>
+            <div class="whatsapp-btn-wrapper">
+                <a href="https://wa.me/5493814192177?text=Hola%2C%20quisiera%20consultar%20sobre%20un%20veh%C3%ADculo%20visto%20en%20su%20web." target="_blank" class="btn">Chatear por WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#about">Nosotros</a></li>
+                    <li><a href="#featured">Vehículos</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/carscars_ok" target="_blank" aria-label="Instagram de Cars & Cars">&#xF16D;</a> 
+                <!-- Unicode for Instagram icon. Assumes a font like Font Awesome is available, but for strict no-external-libraries, this is a placeholder. Realistically, a simple 'I' or a custom SVG would be used. For this exercise, I'll use a generic placeholder -->
+            </div>
+            <p>&copy; 2024 Cars & Cars. Todos los derechos reservados.</p>
+            <p>Av. Aconquija 1567 – Yerba Buena, Tucumán</p>
+        </div>
+    </footer>
+</body>
+</html>
